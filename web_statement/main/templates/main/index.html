@@ -1,6 +1,13 @@
 {% extends 'main/layout.html' %}
 {% block title %}Заголовок главной странциы{% endblock %}
 {% block content %}
-    <h1>Тело главной страницы лейаут</h1>
-    {% include 'main/test.html' %}
+    <h1>{{ title }}</h1>
+    <button class="btn btn-warning">Кнопка</button>
+<!--    {% include 'main/test.html' %}-->
+    {% for el in values %}
+        <p>{{ el }}</p>
+    {% endfor %}
+
+    {{ obj.car1 }}
+
 {% endblock %}
