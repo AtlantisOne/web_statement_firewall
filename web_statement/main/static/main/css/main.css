@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.main_h3 {
+    padding-bottom: 32px;
+    text-align: center;
+}
+
+.result_button {
+    width: 200px;
+}

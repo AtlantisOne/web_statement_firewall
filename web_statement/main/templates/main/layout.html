@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 </head>
 <body>
-    <aside>
-        <h3>Навигация</h3>
-        <ul>
-            <a href="{% url 'home' %}"><li>Главная</li></a>
-            <a href="{% url 'about' %}"><li>Про нас</li></a>
-            <a href="{% url 'test' %}"><li>Test</li></a>
-        </ul>
-
-    </aside>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-
+{% block content %}
+{% endblock %}
 </body>
 </html>
