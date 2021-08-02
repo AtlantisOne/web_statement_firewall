@@ -17,7 +17,7 @@ from .models import Bid
 #     return render(request, 'main/index.html', data)
 
 def index(request):
-    bids = Bid.objects.all()
+    bids = Bid.objects.order_by('-created_date_bid')
     return render(request, 'main/index.html', {'bids': bids})
 
 def about(request):
