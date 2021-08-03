@@ -1,0 +1,74 @@
+{% extends 'main/layout.html' %}
+{% block title %}Создание заявки HTML{% endblock %}
+{% block content %}
+    <div class="container">
+        <a href="{% url 'home' %}">Главная</a>
+        <form method="post">
+            {% csrf_token %}
+
+            <h3 class="main_h3">Создание заявки</h3>
+
+            <div class="num_text">Номер заявки</div>
+            <input name="num_bid" class="num_inp" placeholder="Номер заявки" type="text">
+            <br>
+            <br>
+
+            <div class="istochnik_text">Источник</div>
+            <input name="source_bid" class="istochnik_inp" placeholder="Источник" type="text" size="16" pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+            <br>
+            <br>
+
+            <div class="poluchatel_text">Получатель</div>
+            <input name="recipient_bid" class="poluchatel_inp" placeholder="Получатель" type="text" size="16" pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+            <br>
+            <br>
+
+
+            <div class="port_text">Порты</div>
+            <input name="port_bid" class="port_inp" placeholder="Порты" type="text" pattern="^[0-9]+$">
+            <br>
+            <br>
+
+            <div class="protocol_text">Протокол</div>
+            <!-- Начально будет выбрано второе значение -->
+            <select name="protocol_bid"> <!--Supplement an id here instead of using 'name'-->
+                <option value="TCP" selected>TCP</option>
+                <option value="UDP">UDP</option>
+                <option value="TCP/UDP">TCP/UDP</option>
+            </select>
+            <br>
+            <br>
+
+            <div class="opisanie_text">Описание</div>
+            <textarea name="description_bid" class="opisanie_inp" cols="100" rows="2" placeholder="Описание"></textarea>
+            <br>
+            <br>
+
+            <div class="obosnovanye_text">Обосноваине</div>
+            <textarea name="justification_bid" class="obosnovanye_inp" cols="100" rows="2" placeholder="Обоснование"></textarea>
+            <br>
+            <br>
+
+            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>
+            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>
+            <label for="date_1"><input type="date" id="date_1" name="date_1"/> Начальная дата действия</label><br>
+            <label for="date_2"><input type="date" id="date_2" name="date_2"/> Конечная дата действия</label>
+            <br>
+            <br>
+
+            <button name="result_button" class="result_button" type="submit">Создать</button>
+            <button class="buttom" type="reset">Очистить</button>
+        </form>
+<!--        {% if bids %}-->
+<!--            {% for el in bids %}-->
+<!--                <div>-->
+<!--                    <p>{{ el.num_bid }}</p>-->
+<!--                    <p>{{ el.source_bid }}</p>-->
+<!--                    <p>{{ el.protocol_bid }}</p>-->
+<!--                </div>-->
+<!--            {% endfor %}-->
+<!--        {% else %}-->
+<!--            <p>Заявок нет </p>-->
+<!--        {% endif %}-->
+    </div>
+{% endblock %}

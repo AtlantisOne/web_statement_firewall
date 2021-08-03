@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Bid
+from .forms import BidForm
+import time
 # Create your views here.
 
 # def index(request):
@@ -25,3 +27,33 @@ def about(request):
 
 def test(request):
     return render(request, 'main/test.html')
+
+def create_jango(request):
+    error = ''
+    complete_bid = ''
+    if request.method == 'POST':
+        form = BidForm(request.POST)
+        if form.is_valid():
+            form.save()
+            complete_bid = 'Заявка успешно дабавлена'
+            time.sleep(3)
+            return redirect('home')
+        else:
+            error = 'Форма была заполнена неверно'
+
+    form = BidForm()
+    data = {
+        'form': form,
+        'error': error,
+        'complete_bid': complete_bid
+    }
+    return render(request, 'main/create_jango.html', data)
+
+def create_html(request):
+
+    form = BidForm()
+    data = {
+        'form': form
+    }
+
+    return render(request, 'main/create_html.html', data)

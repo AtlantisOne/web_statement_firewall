@@ -1,0 +1,34 @@
+{% extends 'main/layout.html' %}
+{% block title %}Создание заявки Джанго{% endblock %}
+{% block content %}
+    <div class="container">
+        <a href="{% url 'home' %}">Главная</a>
+
+        <form method="post">
+            {% csrf_token %}
+                <h3 class="main_h3">Создание заявки</h3>
+                <h3>{{ complete_bid }}</h3>
+                <h3>{{ error }}</h3>
+                {{ form.num_bid }}<br><br>
+                {{ form.source_bid }}<br><br>
+                {{ form.recipient_bid }}<br><br>
+                {{ form.port_bid }}<br><br>
+                {{ form.protocol_bid }}<br><br>
+                {{ form.description_bid }}<br><br>
+                {{ form.justification_bid }}<br><br>
+                <h3>{{ error }}</h3>
+                <button name="result_button" class="result_button" type="submit">Создать</button>
+        </form>
+<!--        {% if bids %}-->
+<!--            {% for el in bids %}-->
+<!--                <div>-->
+<!--                    <p>{{ el.num_bid }}</p>-->
+<!--                    <p>{{ el.source_bid }}</p>-->
+<!--                    <p>{{ el.protocol_bid }}</p>-->
+<!--                </div>-->
+<!--            {% endfor %}-->
+<!--        {% else %}-->
+<!--            <p>Заявок нет </p>-->
+<!--        {% endif %}-->
+    </div>
+{% endblock %}
