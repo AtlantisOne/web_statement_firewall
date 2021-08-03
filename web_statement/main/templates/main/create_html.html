@@ -7,7 +7,8 @@
             {% csrf_token %}
 
             <h3 class="main_h3">Создание заявки</h3>
-
+            <h3>{{ complete_bid }}</h3>
+            <h3>{{ error_bid }}</h3>
             <div class="num_text">Номер заявки</div>
             <input name="num_bid" class="num_inp" placeholder="Номер заявки" type="text">
             <br>

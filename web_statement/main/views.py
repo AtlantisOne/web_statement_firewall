@@ -50,10 +50,22 @@ def create_jango(request):
     return render(request, 'main/create_jango.html', data)
 
 def create_html(request):
+    error_bid = ''
+    complete_bid = ''
+    if request.method == 'POST':
+        form = BidForm(request.POST)
+        if form.is_valid():
+            form.save()
+            complete_bid = 'Заявка успешно добавлена'
+            # time.sleep(3)
+            # return redirect('home')
+        else:
+            error_bid = 'Форма была заполнена неверно'
 
     form = BidForm()
     data = {
-        'form': form
+        'form': form,
+        'error': error_bid,
+        'complete_bid': complete_bid
     }
-
     return render(request, 'main/create_html.html', data)
