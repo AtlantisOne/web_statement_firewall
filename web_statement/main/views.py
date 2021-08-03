@@ -29,22 +29,22 @@ def test(request):
     return render(request, 'main/test.html')
 
 def create_jango(request):
-    error = ''
+    error_bid = ''
     complete_bid = ''
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
             form.save()
-            complete_bid = 'Заявка успешно дабавлена'
-            time.sleep(3)
-            return redirect('home')
+            complete_bid = 'Заявка успешно добавлена'
+            # time.sleep(3)
+            # return redirect('home')
         else:
-            error = 'Форма была заполнена неверно'
+            error_bid = 'Форма была заполнена неверно'
 
     form = BidForm()
     data = {
         'form': form,
-        'error': error,
+        'error': error_bid,
         'complete_bid': complete_bid
     }
     return render(request, 'main/create_jango.html', data)
