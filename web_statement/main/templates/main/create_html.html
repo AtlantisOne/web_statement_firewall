@@ -40,6 +40,14 @@
             <br>
             <br>
 
+<!--            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>-->
+<!--            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>-->
+            <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule" checked/>Постоянное</label><br><br>
+            <label for="date_rule_start"><input type="date" id="date_rule_start" name="date_rule_start"/> Начальная дата действия</label><br>
+            <label for="date_rule_end"><input type="date" id="date_rule_end" name="date_rule_end"/> Конечная дата действия</label>
+            <br>
+            <br>
+
             <div class="opisanie_text">Описание</div>
             <textarea name="description_bid" class="opisanie_inp" cols="100" rows="2" placeholder="Описание"></textarea>
             <br>
@@ -50,12 +58,6 @@
             <br>
             <br>
 
-            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>
-            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>
-            <label for="date_1"><input type="date" id="date_1" name="date_1"/> Начальная дата действия</label><br>
-            <label for="date_2"><input type="date" id="date_2" name="date_2"/> Конечная дата действия</label>
-            <br>
-            <br>
 
             <button name="result_button" class="result_button" type="submit">Создать</button>
             <button class="buttom" type="reset">Очистить</button>
