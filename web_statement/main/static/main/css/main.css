@@ -18,6 +18,10 @@
     width: 200px;
 }
 
+.main {
+  display: flex;
+}
+
 input[name="date_rule_start"] {
   display: none;
 }
