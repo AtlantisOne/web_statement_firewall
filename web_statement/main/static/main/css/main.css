@@ -17,3 +17,11 @@
 .result_button {
     width: 200px;
 }
+
+input[name="date_rule_start"] {
+  display: none;
+}
+
+input[name="persistent_rule"]:checked~input[name="date_rule_start"] {
+  display: inline-block;
+}

@@ -26,8 +26,8 @@ class Bid(models.Model):
     persistent_rule = models.BooleanField('Постоянное правило', default=True)
     date_rule_start = models.DateField('Дата начала действия', null=True, blank=True)
     date_rule_end = models.DateField('Дата окончания действия', null=True, blank=True)
-    justification_bid = models.TextField('Обоснование')
-    description_bid = models.TextField('Описание')
+    justification_bid = models.TextField('Обоснование', default='Обоснование')
+    description_bid = models.TextField('Описание', default='Описание')
 
 
     def __str__(self):

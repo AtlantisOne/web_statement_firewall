@@ -4,6 +4,9 @@
     <div class="container">
         <a href="{% url 'home' %}">Главная</a>
         <form method="post">
+<!--            <script language="JavaScript">-->
+<!--                alert("Привет, мир!");-->
+<!--            </script>-->
             {% csrf_token %}
 
             <h3 class="main_h3">Создание заявки</h3>
@@ -26,16 +29,19 @@
 
 
             <div class="port_text">Порты</div>
-            <input name="port_bid" class="port_inp" placeholder="Порты" type="text" pattern="^[0-9]+$">
+            <input name="port_bid" id="port_bid" class="port_inp" placeholder="Порты" type="text" pattern="^[0-9]+$">
+            <script type="text/javascript">
+                document.getElementById('port_bid').value = '3389';
+            </script>
             <br>
             <br>
 
             <div class="protocol_text">Протокол</div>
             <!-- Начально будет выбрано второе значение -->
             <select name="protocol_bid"> <!--Supplement an id here instead of using 'name'-->
-                <option value="TCP" selected>TCP</option>
-                <option value="UDP">UDP</option>
-                <option value="TCP/UDP">TCP/UDP</option>
+                <option value="1" selected>TCP</option>
+                <option value="2">UDP</option>
+                <option value="3">TCP/UDP</option>
             </select>
             <br>
             <br>
@@ -61,6 +67,8 @@
 
             <button name="result_button" class="result_button" type="submit">Создать</button>
             <button class="buttom" type="reset">Очистить</button>
+            <br>
+            <br>
         </form>
 <!--        {% if bids %}-->
 <!--            {% for el in bids %}-->
