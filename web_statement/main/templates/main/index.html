@@ -2,9 +2,9 @@
 {% block title %}Создание заявки{% endblock %}
 {% block content %}
     <div class="container">
+        <a href="{% url 'login' %}">Войти</a><br><br>
         <a href="{% url 'create_html' %}">Добавить заявку c помощью HTML</a><br><br>
         <a href="{% url 'create_jango' %}">Добавить заявку c помощью jango</a>
     </div>
 {% endblock %}
 
-<!--        <a href="{% url 'login' %}">Войти</a><br><br>-->

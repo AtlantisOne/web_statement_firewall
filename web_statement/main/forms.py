@@ -1,6 +1,6 @@
 from .models import Bid
 from django.forms import ModelForm, TextInput, Textarea
-# from django import forms
+from django import forms
 # from django.contrib.auth.models import User
 
 class BidForm(ModelForm):
@@ -40,6 +40,7 @@ class BidForm(ModelForm):
 #         super().__init__(*args, **kwargs)
 #         self.fields['username'],label = 'Логин'
 #         self.fields['password'],label = 'Пароль'
+
 #
 #     def clean(self):
 #         username = self.cleaned_data['username']
