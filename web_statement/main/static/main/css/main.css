@@ -4,7 +4,7 @@
 }
 
 .container {
-    max-width: 1140px;
+    max-width: 800px;
     margin: 0 auto;
     padding-top: 50px;
 }
@@ -20,12 +20,10 @@
 
 .main {
   display: flex;
+  justify-content: space-between;
 }
 
-input[name="date_rule_start"] {
-  display: none;
-}
-
-input[name="persistent_rule"]:checked~input[name="date_rule_start"] {
-  display: inline-block;
+.buttons_main {
+  display: flex;
+  justify-content: space-between;
 }
