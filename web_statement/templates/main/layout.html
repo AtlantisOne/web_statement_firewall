@@ -9,6 +9,12 @@
     <script type="text/javascript" src="{% static 'main/js/jquery-3.6.0.min.js' %}"></script>
 </head>
 <body>
+{% if user.is_authenticated %}
+    <p>Привет {{ user.username }}!</p>
+    <p><a href="{% url 'logout' %}">Выйти</a></p>
+    {% else %}
+    <p><a href="{% url 'login' %}">Войти</a></p>
+{% endif %}
 {% block content %}
 {% endblock %}
 </body>
