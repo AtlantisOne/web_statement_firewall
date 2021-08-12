@@ -3,7 +3,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-
     <script type="text/javascript" src="{% static 'main/js/jquery-3.6.0.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
     <title>{% block title %}{% endblock %}</title>
@@ -12,9 +11,9 @@
 	<![endif]-->
 </head>
 <body>
-    <div id="login-form">
-      {% block content %}
-      {% endblock %}
-    </div>
+
+        {% block content %}
+        {% endblock %}
+
 </body>
 </html>

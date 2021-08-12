@@ -6,7 +6,7 @@ from django import forms
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        fields = ['num_bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', 'protocol_bid', 'persistent_rule', 'date_rule_start', 'date_rule_end',  'description_bid', 'justification_bid']
+        fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', 'protocol_bid', 'persistent_rule', 'date_rule_start', 'date_rule_end',  'description_bid', 'justification_bid']
         widgets = {
             'num_bid': TextInput(attrs={
                 'placeholder': "Номер заявки"

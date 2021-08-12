@@ -2,10 +2,15 @@
 /* CSS Document */
 
 /* ---------- GENERAL ---------- */
+.container {
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 540px;
+}
 
 body {
-	background: url(../images/bg.png) repeat;
-	color: #999;
+    background: linear-gradient(#78efff, white);
 	font: 100%/1.5em sans-serif;
 	margin: 0;
 }

@@ -5,6 +5,7 @@ from .models import Bid
 from .forms import BidForm
 # from django.views.generic import View
 # from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 # import time
 # Create your views here.
@@ -35,6 +36,7 @@ def about(request):
 def test(request):
     return render(request, 'main/test.html')
 
+@login_required
 def create_jango(request):
     error_bid = ''
     complete_bid = ''
@@ -56,9 +58,11 @@ def create_jango(request):
     }
     return render(request, 'main/create_jango.html', data)
 
+@login_required
 def create_html(request):
     error_bid = ''
     complete_bid = ''
+    current_user = request.user.id
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -73,10 +77,19 @@ def create_html(request):
     data = {
         'form': form,
         'error': error_bid,
-        'complete_bid': complete_bid
+        'complete_bid': complete_bid,
+        'current_user': current_user
     }
     return render(request, 'main/create_html.html', data)
 
+def auth_user_id(request):
+    auth_user_id = request.user.id
+    form = BidForm(request.POST)
+    id = {
+        'form': form,
+        'auth_user_id': auth_user_id
+    }
+    return render(request, 'main/create_html.html', id)
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
 #         form = LoginForm(request.POST or None)

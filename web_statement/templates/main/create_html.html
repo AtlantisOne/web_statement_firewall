@@ -2,6 +2,7 @@
 {% block title %}Создание заявки HTML{% endblock %}
 {% block content %}
 <div class="container">
+    <div>
     <a href="{% url 'home' %}">Главная</a>
     <form method="post">
         <!--            <script language="JavaScript">-->
@@ -12,6 +13,7 @@
         <h3 class="main_h3">Создание заявки</h3>
         <h3>{{ complete_bid }}</h3>
         <h3>{{ error_bid }}</h3>
+        <h3>{{ auth_user_id }}</h3>
         <div class="main">
             <div>
                 <p>Номер заявки</p>
@@ -67,11 +69,12 @@
         <div>
             <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
                     checked />Постоянное</label><br><br>
-            <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start" /> Начальная
+            <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" /> Начальная
                 дата действия</label><br>
             <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end" /> Конечная дата
                 действия</label>
-        </div>
+            <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
+
 
         <script>
             if ($('#persistent_rule').is(':checked')){
@@ -115,5 +118,8 @@
     <!--        {% else %}-->
     <!--            <p>Заявок нет </p>-->
     <!--        {% endif %}-->
-</div>
+        </div>
+    </div>
+
+
 {% endblock %}

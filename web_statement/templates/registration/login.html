@@ -1,49 +1,52 @@
 {% extends 'accounts/layout_auth.html' %}
 {% block title %}Вход{% endblock %}
-    <div id="login-form">
-      {% block content %}
-        <h1>Авторизация на сайте</h1>
-        <fieldset>
-            <form action="{% url 'login' %}" method="post">
-                {% csrf_token %}
-                {% if form.errors %}
-                  <p>Ваш логин или пароль неверны! Пожалуйста попробуйте снова.</p>
-                {% endif %}
 
-                {% if next %}
-                  {% if user.is_authenticated %}
-                    <p>У вашей учетной записи нет доступа к этой странице. Чтобы продолжить,
-                        войдите в систему с учетной записью, у которой есть доступ.</p>
-                  {% else %}
-                    <p>Пожалуйста, войдите, чтобы увидеть эту страницу.</p>
-                  {% endif %}
-                {% endif %}
-                 {{user}}
+{% block content %}
+    <di3v class="container">
+        <div id="login-form">
+            <h1>Авторизация на сайте</h1>
+            <fieldset>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                      <p>Ваш логин или пароль неверны! Пожалуйста попробуйте снова.</p>
+                    {% endif %}
 
-                <p>Логин</p>
-                {{ form.username }}
-                <script type="text/javascript">
-                    document.getElementById('id_username').value = 'Логин';
-                </script>
+                    {% if next %}
+                      {% if user.is_authenticated %}
+                        <p>У вашей учетной записи нет доступа к этой странице. Чтобы продолжить,
+                            войдите в систему с учетной записью, у которой есть доступ.</p>
+                      {% else %}
+                        <p>Пожалуйста, войдите, чтобы увидеть эту страницу.</p>
+                      {% endif %}
+                    {% endif %}
 
-                <p>Пароль</p>
-                {{ form.password }}
-                <script type="text/javascript">
-                    document.getElementById('id_password').value = '******';
-                </script>
+                    <p>Логин</p>
+                    {{ form.username }}
+                    <script type="text/javascript">
+                        document.getElementById('id_username').value = 'Логин';
+                    </script>
+
+                    <p>Пароль</p>
+                    {{ form.password }}
+                    <script type="text/javascript">
+                        document.getElementById('id_password').value = '******';
+                    </script>
 
 
-<!--                <input type="text" name="" required="" value="Логин" onblur="if(this.value=='')this.value='Логин'" onfocus="if(this.value=='Логин')this.value='' ">-->
-<!--                <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">-->
-                <input type="submit" value="ВОЙТИ">
-                <input type="hidden" name="next" value="{{ next }}" />
-<!--                <footer class="clearfix">-->
-<!--                    <p><span class="info">?</span><a href="#">Забыли пароль?</a></p>-->
-<!--                </footer>-->
-            </form>
+    <!--                <input type="text" name="" required="" value="Логин" onblur="if(this.value=='')this.value='Логин'" onfocus="if(this.value=='Логин')this.value='' ">-->
+    <!--                <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">-->
+                    <input type="submit" value="ВОЙТИ">
+                    <input type="hidden" name="next" value="{{ next }}" />
+    <!--                <footer class="clearfix">-->
+    <!--                    <p><span class="info">?</span><a href="#">Забыли пароль?</a></p>-->
+    <!--                </footer>-->
+                </form>
 
-        </fieldset>
-      {% endblock %}
-    </div>
+            </fieldset>
+                </div>
+        </di3v>
+{% endblock %}
+
 </body>
 </html>
