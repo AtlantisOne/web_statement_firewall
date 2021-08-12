@@ -27,9 +27,6 @@ def index(request):
     bids = Bid.objects.order_by('-created_date_bid')
     return render(request, 'main/index.html', {'bids': bids})
 
-# def login(request):
-#     return render(request, 'login_form/login.html')
-
 def about(request):
     return render(request, 'main/about.html')
 
@@ -45,8 +42,6 @@ def create_jango(request):
         if form.is_valid():
             form.save()
             complete_bid = 'Заявка успешно добавлена'
-            # time.sleep(3)
-            # return redirect('home')
         else:
             error_bid = 'Форма была заполнена неверно'
 
@@ -82,14 +77,25 @@ def create_html(request):
     }
     return render(request, 'main/create_html.html', data)
 
-def auth_user_id(request):
-    auth_user_id = request.user.id
-    form = BidForm(request.POST)
-    id = {
-        'form': form,
-        'auth_user_id': auth_user_id
+# def auth_user_id(request):
+#     auth_user_id = request.user.id
+#     form = BidForm(request.POST)
+#     id = {
+#         'form': form,
+#         'auth_user_id': auth_user_id
+#     }
+#     return render(request, 'main/create_html.html', id)
+
+@login_required
+def user_bids(request):
+    context = {
+        'posts': Bid.objects.filter(auth_user=request.user)
     }
-    return render(request, 'main/create_html.html', id)
+
+    return render(request, 'main/index.html', context)
+def index(request):
+    bids = Bid.objects.order_by('-created_date_bid')
+    return render(request, 'main/index.html', {'bids': bids})
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
 #         form = LoginForm(request.POST or None)

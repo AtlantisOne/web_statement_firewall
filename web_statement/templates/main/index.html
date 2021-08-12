@@ -11,6 +11,25 @@
                     <p><a href="{% url 'login' %}">Войти</a></p>
                 {% endif %}
 
+                <div class="user_bisd_div">
+                    <h4>Ваши заявки:</h4>
+                    <hr>
+                    {% for el in posts %}
+                        <p>Заявка: {{ el.num_bid }}, дата создания: {{ el.created_date_bid }}</p>
+                        <hr>
+                    {% endfor %}
+                </div>
 
         {% endblock %}
 
+<!--            {% if bids %}-->
+<!--                {% for el in bids %}-->
+<!--                    <div>-->
+<!--                        <p>{{ el.num_bid }}</p>-->
+<!--                        <p>{{ el.source_bid }}</p>-->
+<!--                        <p>{{ el.protocol_bid }}</p>-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+<!--            {% else %}-->
+<!--                <p>Заявок нет </p>-->
+<!--            {% endif %}-->

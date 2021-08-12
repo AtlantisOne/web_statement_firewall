@@ -5,11 +5,7 @@
     <div>
     <a href="{% url 'home' %}">Главная</a>
     <form method="post">
-        <!--            <script language="JavaScript">-->
-        <!--                alert("Привет, мир!");-->
-        <!--            </script>-->
         {% csrf_token %}
-
         <h3 class="main_h3">Создание заявки</h3>
         <h3>{{ complete_bid }}</h3>
         <h3>{{ error_bid }}</h3>
