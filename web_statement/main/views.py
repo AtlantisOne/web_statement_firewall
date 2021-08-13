@@ -74,10 +74,10 @@ def user_bids(request):
     return render(request, 'main/index.html', context)
 
 
-class Bid_edit(DetailView):
+class Bid_detail(DetailView):
     model = Bid
-    template_name = 'bid_edit.html'
-    context_object_name = 'bid'
+    template_name = 'main/bid_detail.html'
+    context_object_name = 'bid_detail'
 
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):

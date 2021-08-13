@@ -16,7 +16,8 @@
                     <hr>
                     {% if posts %}
                         {% for el in posts %}
-                            <p>Заявка: {{ el.num_bid }}, дата создания: {{ el.created_date_bid }}</p>
+                            <p>Заявка: {{ el.num_bid }}, дата создания: {{ el.created_date_bid }}, автор: {{ el.auth_user }}
+                                <a href="{% url 'bid_detail' el.id %}">подробнее</a> </p>
                             <hr>
                         {% endfor %}
                     {% else %}

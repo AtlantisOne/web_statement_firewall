@@ -7,5 +7,5 @@ urlpatterns = [
     path('test/', views.test, name='test'),
     path('create_jango/', views.create_jango, name='create_jango'),
     path('create_html/', views.create_html, name='create_html'),
-    path('<int:pk>', views.Bid_edit.as_view(), name='bid_edit'),
+    path('<int:pk>/', views.Bid_detail.as_view(), name='bid_detail'),
 ]
