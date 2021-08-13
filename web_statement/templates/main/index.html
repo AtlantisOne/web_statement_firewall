@@ -3,33 +3,25 @@
 
         {% block content %}
 
-                {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
                 <a href="{% url 'create_html' %}">Добавить заявку c помощью HTML</a><br><br>
                 <a href="{% url 'create_jango' %}">Добавить заявку c помощью jango</a>
-                    {% else %}
-                    <p>Пожалуйста, войдите в систему.</p>
-                    <p><a href="{% url 'login' %}">Войти</a></p>
-                {% endif %}
+            {% else %}
+                <p>Пожалуйста, войдите в систему.</p>
+                <p><a href="{% url 'login' %}">Войти</a></p>
+            {% endif %}
 
                 <div class="user_bisd_div">
                     <h4>Ваши заявки:</h4>
                     <hr>
-                    {% for el in posts %}
-                        <p>Заявка: {{ el.num_bid }}, дата создания: {{ el.created_date_bid }}</p>
-                        <hr>
-                    {% endfor %}
+                    {% if posts %}
+                        {% for el in posts %}
+                            <p>Заявка: {{ el.num_bid }}, дата создания: {{ el.created_date_bid }}</p>
+                            <hr>
+                        {% endfor %}
+                    {% else %}
+                        Заявок нет
+                    {% endif %}
                 </div>
-
         {% endblock %}
-
-<!--            {% if bids %}-->
-<!--                {% for el in bids %}-->
-<!--                    <div>-->
-<!--                        <p>{{ el.num_bid }}</p>-->
-<!--                        <p>{{ el.source_bid }}</p>-->
-<!--                        <p>{{ el.protocol_bid }}</p>-->
-<!--                    </div>-->
-<!--                {% endfor %}-->
-<!--            {% else %}-->
-<!--                <p>Заявок нет </p>-->
-<!--            {% endif %}-->
+        </div>

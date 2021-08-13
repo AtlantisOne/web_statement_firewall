@@ -1,12 +1,12 @@
 from .models import Bid
 from django.forms import ModelForm, TextInput, Textarea
-from django import forms
-# from django.contrib.auth.models import User
+
 
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', 'protocol_bid', 'persistent_rule', 'date_rule_start', 'date_rule_end',  'description_bid', 'justification_bid']
+        fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', 'protocol_bid',
+                  'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid']
         widgets = {
             'num_bid': TextInput(attrs={
                 'placeholder': "Номер заявки"
@@ -31,6 +31,9 @@ class BidForm(ModelForm):
             })
 
         }
+
+# from django import forms
+# from django.contrib.auth.models import User
 
 # class LoginForm(ModelForm):
 #

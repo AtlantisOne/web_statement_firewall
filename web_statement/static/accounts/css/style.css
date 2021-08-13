@@ -10,7 +10,7 @@
 }
 
 body {
-    background: linear-gradient(#78efff, white);
+    background-image: url(../img/bg.png);
 	font: 100%/1.5em sans-serif;
 	margin: 0;
 }
@@ -115,7 +115,7 @@ input[type="submit"] { cursor: pointer; }
 }
 
 #login-form input[type="submit"] {
-	background: #1dabb8;
+	background: #ffbae8;
 	border-radius: 3px;
 	color: #fff;
 	float: center;
@@ -124,7 +124,7 @@ input[type="submit"] { cursor: pointer; }
 	padding: 12px 20px;
 }
 
-#login-form input[type="submit"]:hover { background: #198d98; }
+#login-form input[type="submit"]:hover { background: #ff4dc4; }
 
 #login-form footer {
 	font-size: 12px;
