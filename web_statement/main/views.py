@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Bid
 from .forms import BidForm
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.decorators import login_required
 
 
@@ -78,6 +78,13 @@ class Bid_detail(DetailView):
     model = Bid
     template_name = 'main/bid_detail.html'
     context_object_name = 'bid_detail'
+
+class Bid_edit(UpdateView):
+    model = Bid
+    template_name = 'main/create_html.html'
+    # fields = ['num_bid']
+    form_class = BidForm
+
 
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
