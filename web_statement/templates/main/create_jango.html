@@ -10,6 +10,7 @@
                 <h3>{{ complete_bid }}</h3>
                 <h3>{{ error_bid }}</h3>
                 {{ form.num_bid }}<br><br>
+                {{ form.auth_user }}<br><br>
                 {{ form.source_bid }}<br><br>
                 {{ form.recipient_bid }}<br><br>
                 {{ form.port_bid }}<br><br>
@@ -19,6 +20,7 @@
                 {{ form.date_rule_end }}<br><br>
                 {{ form.description_bid }}<br><br>
                 {{ form.justification_bid }}<br><br>
+                <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
                 <h3>{{ error }}</h3>
                 <button name="result_button" class="result_button" type="submit">Создать</button>
         </form>

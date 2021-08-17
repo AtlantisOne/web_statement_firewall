@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Bid
 from .forms import BidForm
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 
 
@@ -22,6 +22,7 @@ def test(request):
 def create_jango(request):
     error_bid = ''
     complete_bid = ''
+    current_user = request.user.id
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -33,7 +34,8 @@ def create_jango(request):
     data = {
         'form': form,
         'error': error_bid,
-        'complete_bid': complete_bid
+        'complete_bid': complete_bid,
+        'current_user': current_user
     }
     return render(request, 'main/create_jango.html', data)
 
@@ -81,11 +83,15 @@ class Bid_detail(DetailView):
 
 class Bid_edit(UpdateView):
     model = Bid
-    template_name = 'main/create_html.html'
+    template_name = 'main/create_jango.html'
     # fields = ['num_bid']
     form_class = BidForm
 
-
+class Bid_delete(DeleteView):
+    model = Bid
+    success_url = '/'
+    context_object_name = 'bid_delete'
+    template_name = 'main/bid_delete.html'
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
 #         form = LoginForm(request.POST or None)

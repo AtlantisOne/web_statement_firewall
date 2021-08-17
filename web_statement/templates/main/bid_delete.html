@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+{% block title %}Удаление {{ bid_delete.num_bid }}{% endblock %}
+{% block content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'home' %}">Назад</a>
+            <h3>{{ bid_delete.num_bid }}</h3>
+        <div class="buttons_main">
+            <button name="result_button" type="submit">Удалить заявку</button>
+        </div>
+    </form>
+
+
+</div>
+{% endblock %}

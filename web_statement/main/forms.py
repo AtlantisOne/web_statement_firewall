@@ -1,5 +1,6 @@
 from .models import Bid
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, TextInput, Textarea, HiddenInput
+
 
 
 class BidForm(ModelForm):
@@ -20,16 +21,20 @@ class BidForm(ModelForm):
             'protocol_bid': TextInput(attrs={
                 'placeholder': "Протокол"
             }),
+            'port_bid': TextInput(attrs={
+                'placeholder': "Порт"
+            }),
+            'auth_user': TextInput(attrs={
+                'name': "auth_user",
+                'placeholder': "юзер",
+                'value': 'request.user.id'
+            }),
             'description_bid': Textarea(attrs={
                 'placeholder': "Описание"
             }),
             'justification_bid': Textarea(attrs={
                 'placeholder': "Обоснование"
-            }),
-            'port_bid': TextInput(attrs={
-                'placeholder': "Порт"
             })
-
         }
 
 # from django import forms

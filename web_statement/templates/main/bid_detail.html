@@ -13,6 +13,9 @@
     <p>{{ bid_detail.justification_bid }}</p>
     <p>{{ bid_detail.description_bid }}</p>
 
+    <a href="{% url 'bid_edit' bid_detail.id %}">Редактировать</a>
+    <a href="{% url 'bid_delete' bid_detail.id %}">Удалить</a>
+
 
 </div>
 {% endblock %}

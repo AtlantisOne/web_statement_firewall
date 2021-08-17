@@ -20,6 +20,9 @@ class Bid(models.Model):
     def __str__(self):
         return self.num_bid
 
+    def get_absolute_url(self):
+        return f'/{self.id}'
+
     class Meta:
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
