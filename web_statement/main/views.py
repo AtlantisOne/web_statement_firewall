@@ -77,8 +77,11 @@ class Bid_detail(DetailView):
 
 class Bid_edit(UpdateView):
     model = Bid
-    template_name = 'main/create_django.html'
-    form_class = BidForm
+    template_name = 'main/bid_edit.html'
+    context_object_name = 'bid_edit'
+    fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', 'protocol_bid',
+              'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid']
+    # form_class = BidForm
 
 class Bid_delete(DeleteView):
     model = Bid
