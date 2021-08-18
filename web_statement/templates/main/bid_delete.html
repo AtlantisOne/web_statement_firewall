@@ -1,6 +1,7 @@
 {% extends 'main/layout.html' %}
 {% block title %}Удаление {{ bid_delete.num_bid }}{% endblock %}
 {% block content %}
+{% if request.user.is_authenticated %}
 <div class="container">
     <form method="post">
         {% csrf_token %}
@@ -13,4 +14,8 @@
 
 
 </div>
+{% else %}
+    <p>Пожалуйста, войдите в систему.</p>
+    <p><a href="{% url 'login' %}">Войти</a></p>
+{% endif %}
 {% endblock %}

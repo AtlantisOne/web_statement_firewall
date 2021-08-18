@@ -13,13 +13,8 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
-
-def test(request):
-    return render(request, 'main/test.html')
-
-
 @login_required
-def create_jango(request):
+def create_django(request):
     error_bid = ''
     complete_bid = ''
     current_user = request.user.id
@@ -37,7 +32,7 @@ def create_jango(request):
         'complete_bid': complete_bid,
         'current_user': current_user
     }
-    return render(request, 'main/create_jango.html', data)
+    return render(request, 'main/create_django.html', data)
 
 
 @login_required
@@ -75,7 +70,6 @@ def user_bids(request):
         }
     return render(request, 'main/index.html', context)
 
-
 class Bid_detail(DetailView):
     model = Bid
     template_name = 'main/bid_detail.html'
@@ -83,8 +77,7 @@ class Bid_detail(DetailView):
 
 class Bid_edit(UpdateView):
     model = Bid
-    template_name = 'main/create_jango.html'
-    # fields = ['num_bid']
+    template_name = 'main/create_django.html'
     form_class = BidForm
 
 class Bid_delete(DeleteView):
@@ -92,6 +85,7 @@ class Bid_delete(DeleteView):
     success_url = '/'
     context_object_name = 'bid_delete'
     template_name = 'main/bid_delete.html'
+
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
 #         form = LoginForm(request.POST or None)

@@ -1,6 +1,7 @@
 {% extends 'main/layout.html' %}
 {% block title %}{{ bid_detail.num_bid }}{% endblock %}
 {% block content %}
+{% if request.user.is_authenticated %}
 <div class="container">
     <a href="{% url 'home' %}">Назад</a>
     <h3>{{ bid_detail.num_bid }}</h3>
@@ -16,6 +17,10 @@
     <a href="{% url 'bid_edit' bid_detail.id %}">Редактировать</a>
     <a href="{% url 'bid_delete' bid_detail.id %}">Удалить</a>
 
-
 </div>
+{% else %}
+    <p>Пожалуйста, войдите в систему.</p>
+    <p><a href="{% url 'login' %}">Войти</a></p>
+{% endif %}
+
 {% endblock %}
