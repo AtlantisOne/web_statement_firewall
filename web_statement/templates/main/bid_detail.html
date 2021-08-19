@@ -6,11 +6,15 @@
     <a href="{% url 'home' %}">Назад</a>
     <h3>{{ bid_detail.num_bid }}</h3>
     <p>{{ bid_detail.created_date_bid }}</p>
+    <p>{{ bid_detail.modified_date_bid }}</p>
+    <p>{{ bid_detail.auth_user }}</p>
     <p>{{ bid_detail.source_bid }}</p>
     <p>{{ bid_detail.recipient_bid }}</p>
     <p>{{ bid_detail.port_bid }}</p>
     <p>{{ bid_detail.protocol_bid }}</p>
     <p>{{ bid_detail.persistent_rule }}</p>
+    <p>{{ bid_detail.date_rule_start }}</p>
+    <p>{{ bid_detail.date_rule_end }}</p>
     <p>{{ bid_detail.justification_bid }}</p>
     <p>{{ bid_detail.description_bid }}</p>
 

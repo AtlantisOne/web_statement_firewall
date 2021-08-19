@@ -42,9 +42,9 @@
             <div>
                 <p>Протокол</p>
                 <!-- Начально будет выбрано второе значение -->
-                <select name="protocol_bid">
+                <select value="{{ bid_edit.protocol_bid }}" name="protocol_bid">
                     <!--Supplement an id here instead of using 'name'-->
-                    <option value="1" selected>TCP</option>
+                    <option value="1">TCP</option>
                     <option value="2">UDP</option>
                     <option value="3">TCP/UDP</option>
                 </select>
@@ -55,11 +55,11 @@
 
         </div>
         <div>
-            <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
-                    checked />Постоянное</label><br><br>
-            <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" /> Начальная
+            <label for="persistent_rule"><input value="{{ bid_edit.persistent_rule }}" name="persistent_rule" type="checkbox" id="persistent_rule"
+                     />Постоянное</label><br><br>
+            <label id="date_rule_start" for="date_rule_start"><input value="{{ bid_edit.date_rule_start }}" type="date" name="date_rule_start" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" /> Начальная
                 дата действия</label><br>
-            <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end" /> Конечная дата
+            <label id="date_rule_end" for="date_rule_end"><input value="{{ bid_edit.date_rule_end }}" type="date" name="date_rule_end" /> Конечная дата
                 действия</label>
             <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
 
