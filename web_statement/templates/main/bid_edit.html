@@ -56,15 +56,14 @@
         </div>
         <div>
             <label for="persistent_rule"><input value="{{ bid_edit.persistent_rule }}" name="persistent_rule" type="checkbox" id="persistent_rule"
-                     />Постоянное</label><br><br>
+                     checked />Постоянное</label><br><br>
             <label id="date_rule_start" for="date_rule_start"><input value="{{ bid_edit.date_rule_start }}" type="date" name="date_rule_start" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" /> Начальная
                 дата действия</label><br>
             <label id="date_rule_end" for="date_rule_end"><input value="{{ bid_edit.date_rule_end }}" type="date" name="date_rule_end" /> Конечная дата
                 действия</label>
             <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
 
-
-        <script>
+  <script>
             if ($('#persistent_rule').is(':checked')){
                     $('#date_rule_start').hide(100);
                     $('#date_rule_end').hide(100);
@@ -79,6 +78,24 @@
                 }
             });
         </script>
+<!--        <script>-->
+<!--            if (document.getElementById("persistent_rule").value == 'True'){-->
+<!--                    $('#date_rule_start').hide(100);-->
+<!--                    $('#date_rule_end').hide(100);-->
+<!--                    $('#persistent_rule').click;-->
+<!--               -->
+<!--            }-->
+<!--                $('#persistent_rule').click(function(){-->
+<!--            if ($(this).is(':checked')){-->
+<!--                    $('#date_rule_start').hide(100);-->
+<!--                    $('#date_rule_end').hide(100);-->
+<!--                } else {-->
+<!--                    $('#date_rule_start').show(100);-->
+<!--                    $('#date_rule_end').show(100);-->
+<!--                }-->
+<!--            });-->
+<!--        </script>-->
+
 
         <p>Описание</p>
         <textarea id="description_bid" name="description_bid" cols="100" rows="2"
