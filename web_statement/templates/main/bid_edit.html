@@ -42,13 +42,16 @@
             <div>
                 <p>Протокол</p>
                 <!-- Начально будет выбрано второе значение -->
-                <select value="{{ bid_edit.protocol_bid }}" name="protocol_bid">
+                <select value="{{ bid_edit.protocol_bid.id }}" name="protocol_bid" id="protocol_bid">
                     <!--Supplement an id here instead of using 'name'-->
                     <option value="1">TCP</option>
                     <option value="2">UDP</option>
                     <option value="3">TCP/UDP</option>
                 </select>
             </div>
+            <script>
+              document.getElementById("protocol_bid").options[{{ bid_edit.protocol_bid.id }}-1].selected=true;
+            </script>
 
             <!--            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>-->
             <!--            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>-->
@@ -61,8 +64,9 @@
                 дата действия</label><br>
             <label id="date_rule_end" for="date_rule_end"><input value="{{ bid_edit.date_rule_end }}" type="date" name="date_rule_end" /> Конечная дата
                 действия</label>
-            <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
-
+            <input type="hidden" name="auth_user" id="auth_user" value="{{ bid_edit.auth_user.id }}" />
+            <input type="text" name="persistent_rule" id="" value="{{ bid_edit.persistent_rule }}" />
+            <input type="text" name="persistent_rule" id="" value="{{ bid_edit.protocol_bid.id }}" />
   <script>
             if ($('#persistent_rule').is(':checked')){
                     $('#date_rule_start').hide(100);

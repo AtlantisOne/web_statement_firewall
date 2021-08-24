@@ -69,7 +69,7 @@
                 дата действия</label><br>
             <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end" /> Конечная дата
                 действия</label>
-            <input type="hidden" name="auth_user" id="auth_user" value="{{ current_user }}" />
+            <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}" />
 
 
         <script>

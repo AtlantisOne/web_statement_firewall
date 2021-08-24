@@ -13,11 +13,11 @@ def index(request):
 def about(request):
     return render(request, 'main/about.html')
 
+
 @login_required
 def create_django(request):
     error_bid = ''
     complete_bid = ''
-    current_user = request.user.id
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -30,7 +30,7 @@ def create_django(request):
         'form': form,
         'error': error_bid,
         'complete_bid': complete_bid,
-        'current_user': current_user
+        # 'current_user': curr_user(request)
     }
     return render(request, 'main/create_django.html', data)
 
@@ -39,7 +39,6 @@ def create_django(request):
 def create_html(request):
     error_bid = ''
     complete_bid = ''
-    current_user = request.user.id
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -53,7 +52,7 @@ def create_html(request):
         'form': form,
         'error': error_bid,
         'complete_bid': complete_bid,
-        'current_user': current_user
+        # 'current_user': curr_user(request)
     }
     return render(request, 'main/create_html.html', data)
 
@@ -70,10 +69,12 @@ def user_bids(request):
         }
     return render(request, 'main/index.html', context)
 
+
 class Bid_detail(DetailView):
     model = Bid
     template_name = 'main/bid_detail.html'
     context_object_name = 'bid_detail'
+
 
 class Bid_edit(UpdateView):
     model = Bid
@@ -81,13 +82,39 @@ class Bid_edit(UpdateView):
     context_object_name = 'bid_edit'
     fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
               'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid']
-    # form_class = BidForm
+
 
 class Bid_delete(DeleteView):
     model = Bid
     success_url = '/'
     context_object_name = 'bid_delete'
     template_name = 'main/bid_delete.html'
+
+# def curr_user(request):
+#     current_user = request.user.id
+#     return current_user
+
+# @login_required
+# def create_html(request):
+#     error_bid = ''
+#     complete_bid = ''
+#     current_user = request.user.id
+#     if request.method == 'POST':
+#         form = BidForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             complete_bid = 'Заявка успешно добавлена'
+#         else:
+#             error_bid = 'Форма была заполнена неверно'
+#
+#     form = BidForm()
+#     data = {
+#         'form': form,
+#         'error': error_bid,
+#         'complete_bid': complete_bid,
+#         'current_user': current_user
+#     }
+#     return render(request, 'main/create_html.html', data)
 
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
