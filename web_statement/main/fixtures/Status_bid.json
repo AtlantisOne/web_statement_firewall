@@ -1,0 +1,23 @@
+[
+  {
+    "model": "main.Protocol_bid_class",
+    "fields": {
+      "id": "1",
+      "title": "TCP"
+    }
+  },
+  {
+    "model": "main.Protocol_bid_class",
+    "fields": {
+      "id": "2",
+      "title": "UDP"
+    }
+  },
+  {
+    "model": "main.Protocol_bid_class",
+    "fields": {
+      "id": "3",
+      "title": "TCP/UDP"
+    }
+  }
+]
