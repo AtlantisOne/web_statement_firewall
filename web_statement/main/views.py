@@ -5,11 +5,6 @@ from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 
 
-def index(request):
-    bids = Bid.objects.order_by('-created_date_bid')
-    return render(request, 'main/index.html', {'bids': bids})
-
-
 def about(request):
     return render(request, 'main/about.html')
 
@@ -39,20 +34,24 @@ def create_django(request):
 def create_html(request):
     error_bid = ''
     complete_bid = ''
+    num_bid = ''
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
-            form.save()
-            complete_bid = 'Заявка успешно добавлена'
+            instance = form.save()
+            instance.num_bid = "OP-" + str(instance.id)
+            num_bid = instance.num_bid
+            instance.save()
+            complete_bid = f'Заявка успешно добавлена: {num_bid}'
         else:
             error_bid = 'Форма была заполнена неверно'
 
     form = BidForm()
     data = {
         'form': form,
-        'error': error_bid,
+        'error_bid': error_bid,
         'complete_bid': complete_bid,
-        # 'current_user': curr_user(request)
+        'num_bid': num_bid,
     }
     return render(request, 'main/create_html.html', data)
 
@@ -89,6 +88,11 @@ class Bid_delete(DeleteView):
     success_url = '/'
     context_object_name = 'bid_delete'
     template_name = 'main/bid_delete.html'
+
+# def index(request):
+#     bids = Bid.objects.order_by('-created_date_bid')
+#     return render(request, 'main/index.html', {'bids': bids})
+
 
 # def curr_user(request):
 #     current_user = request.user.id

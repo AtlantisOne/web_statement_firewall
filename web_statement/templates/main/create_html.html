@@ -3,76 +3,80 @@
 {% block content %}
 <div class="container">
     <div>
-    <a href="{% url 'home' %}">Главная</a>
-    <form method="post">
-        {% csrf_token %}
-        <h3 class="main_h3">Создание заявки</h3>
-        <h3>{{ complete_bid }}</h3>
-        <h3>{{ error_bid }}</h3>
-        <h3>{{ auth_user_id }}</h3>
-        <div class="main">
-            <div>
-                <p>Номер заявки</p>
-                <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text">
-                <script type="text/javascript">
-                    document.getElementById('num_bid').value = '192.168.0.1';
-                </script>
-            </div>
+        <a href="{% url 'home' %}">Главная</a>
+        <form method="post">
+            {% csrf_token %}
+            <h3 class="main_h3">Создание заявки</h3>
+            <h3>{{ complete_bid }}</h3>
+            <h3>{{ error_bid }}</h3>
+            <div class="main">
+                <div>
+                    <p>Номер заявки</p>
+                    <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text" readonly
+                           value="Номер заявки">
+                </div>
 
-            <div>
-                <p>Источник</p>
-                <input id="source_bid" name="source_bid" class="source_bid" placeholder="Источник" type="text" size="16"
-                    pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
-                <script type="text/javascript">
+                <div>
+                    <p>Источник</p>
+                    <input id="source_bid" name="source_bid" class="source_bid" placeholder="Источник" type="text"
+                           size="16"
+                           pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+                    <script type="text/javascript">
                     document.getElementById('source_bid').value = '192.168.0.1';
-                </script>
-            </div>
 
-            <div>
-                <p>Получатель</p>
-                <input id="recipient_bid" name="recipient_bid" class="recipient_bid" placeholder="Получатель"
-                    type="text" size="16"
-                    pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
-                <script type="text/javascript">
+                    </script>
+                </div>
+
+                <div>
+                    <p>Получатель</p>
+                    <input id="recipient_bid" name="recipient_bid" class="recipient_bid" placeholder="Получатель"
+                           type="text" size="16"
+                           pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+                    <script type="text/javascript">
                     document.getElementById('recipient_bid').value = '192.168.0.2';
-                </script>
-            </div>
 
-            <div>
-                <p>Порты</p>
-                <input name="port_bid" id="port_bid" class="port_bid" placeholder="Порты" type="text"
-                    pattern="^[0-9]+$">
-                <script type="text/javascript">
+                    </script>
+                </div>
+
+                <div>
+                    <p>Порты</p>
+                    <input name="port_bid" id="port_bid" class="port_bid" placeholder="Порты" type="text"
+                           pattern="^[0-9]+$">
+                    <script type="text/javascript">
                     document.getElementById('port_bid').value = '3389';
-                </script>
-            </div>
 
+                    </script>
+                </div>
+
+                <div>
+                    <p>Протокол</p>
+                    <!-- Начально будет выбрано второе значение -->
+                    <select name="protocol_bid">
+                        <!--Supplement an id here instead of using 'name'-->
+                        <option value="1" selected>TCP</option>
+                        <option value="2">UDP</option>
+                        <option value="3">TCP/UDP</option>
+                    </select>
+                </div>
+
+                <!--            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>-->
+                <!--            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>-->
+
+            </div>
             <div>
-                <p>Протокол</p>
-                <!-- Начально будет выбрано второе значение -->
-                <select name="protocol_bid">
-                    <!--Supplement an id here instead of using 'name'-->
-                    <option value="1" selected>TCP</option>
-                    <option value="2">UDP</option>
-                    <option value="3">TCP/UDP</option>
-                </select>
-            </div>
-
-            <!--            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>-->
-            <!--            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>-->
-
-        </div>
-        <div>
-            <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
-                    checked />Постоянное</label><br><br>
-            <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" /> Начальная
-                дата действия</label><br>
-            <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end" /> Конечная дата
-                действия</label>
-            <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}" />
+                <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
+                                                    checked/>Постоянное</label><br><br>
+                <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start"
+                                                                         pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d"/>
+                    Начальная
+                    дата действия</label><br>
+                <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end"/> Конечная дата
+                    действия</label>
+                <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
+                <input type="hidden" name="status_bid" id="status_bid" value="1"/>
 
 
-        <script>
+                <script>
             if ($('#persistent_rule').is(':checked')){
                     $('#date_rule_start').hide(100);
                     $('#date_rule_end').hide(100);
@@ -86,40 +90,41 @@
                     $('#date_rule_end').show(100);
                 }
             });
-        </script>
 
-<!--                    <script>-->
-<!--            if ($('#persistent_rule').is(':checked')){-->
-<!--                    $('#date_rule_start').hide(100);-->
-<!--                    $('#date_rule_end').hide(100);-->
-<!--            }-->
-<!--                $('#persistent_rule').click(function(){-->
-<!--            if ($(this).is(':checked')){-->
-<!--                    $('#date_rule_start').hide(100);-->
-<!--                    $('#date_rule_end').hide(100);-->
-<!--                } else {-->
-<!--                    $('#date_rule_start').show(100);-->
-<!--                    $('#date_rule_end').show(100);-->
-<!--                }-->
-<!--            });-->
-<!--        </script>-->
+                </script>
 
-        <p>Описание</p>
-        <textarea id="description_bid" name="description_bid" cols="100" rows="2"
-            placeholder="Описание">Описание</textarea>
+                <!--                    <script>-->
+                <!--            if ($('#persistent_rule').is(':checked')){-->
+                <!--                    $('#date_rule_start').hide(100);-->
+                <!--                    $('#date_rule_end').hide(100);-->
+                <!--            }-->
+                <!--                $('#persistent_rule').click(function(){-->
+                <!--            if ($(this).is(':checked')){-->
+                <!--                    $('#date_rule_start').hide(100);-->
+                <!--                    $('#date_rule_end').hide(100);-->
+                <!--                } else {-->
+                <!--                    $('#date_rule_start').show(100);-->
+                <!--                    $('#date_rule_end').show(100);-->
+                <!--                }-->
+                <!--            });-->
+                <!--        </script>-->
+
+                <p>Описание</p>
+                <textarea id="description_bid" name="description_bid" cols="100" rows="2"
+                          placeholder="Описание">Описание</textarea>
 
 
-        <p>Обосноваине</p>
-        <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
-            placeholder="Обоснование">Обоснование</textarea>
-        <br><br>
+                <p>Обосноваине</p>
+                <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
+                          placeholder="Обоснование">Обоснование</textarea>
+                <br><br>
 
-        <div class="buttons_main">
-            <button name="result_button" type="submit">Создать</button>
-            <button type="reset">Очистить</button>
-        </div>
-    </form>
+                <div class="buttons_main">
+                    <button name="result_button" type="submit">Создать</button>
+                    <button type="reset">Очистить</button>
+                </div>
+        </form>
     </div>
 
 
-{% endblock %}
+    {% endblock %}

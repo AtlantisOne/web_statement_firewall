@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea, HiddenInput
 class BidForm(ModelForm):
     class Meta:
         model = Bid
-        fields = ['auth_user', 'num_bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
+        fields = ['auth_user', 'num_bid', 'status_bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
                   'persistent_rule', 'date_rule_start', 'date_rule_end', 'justification_bid', 'description_bid']
         widgets = {
             'num_bid': TextInput(attrs={
