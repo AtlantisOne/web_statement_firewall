@@ -66,48 +66,34 @@
             <div>
                 <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
                                                     checked/>Постоянное</label><br><br>
-                <label id="date_rule_start" for="date_rule_start"><input type="date" name="date_rule_start"
-                                                                         pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d"/>
+                <label id="date_rule_start_label" for="date_rule_start"><input type="date" name="date_rule_start" id="date_rule_start"/>
                     Начальная
                     дата действия</label><br>
-                <label id="date_rule_end" for="date_rule_end"><input type="date" name="date_rule_end"/> Конечная дата
+                <label id="date_rule_end_label" for="date_rule_end"><input type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
                 <input type="hidden" name="status_bid" id="status_bid" value="1"/>
 
 
                 <script>
-            if ($('#persistent_rule').is(':checked')){
-                    $('#date_rule_start').hide(100);
-                    $('#date_rule_end').hide(100);
-            }
-                $('#persistent_rule').click(function(){
-            if ($(this).is(':checked')){
-                    $('#date_rule_start').hide(100);
-                    $('#date_rule_end').hide(100);
-                } else {
-                    $('#date_rule_start').show(100);
-                    $('#date_rule_end').show(100);
-                }
-            });
-
+                    if ($('#persistent_rule').is(':checked')){
+                            $('#date_rule_start_label').hide(100);
+                            $('#date_rule_end_label').hide(100);
+                    }
+                        $('#persistent_rule').click(function(){
+                    if ($(this).is(':checked')){
+                            $('#date_rule_start_label').hide(100);
+                            $('#date_rule_end_label').hide(100);
+                            alert ('сработало')
+                            $('#date_rule_end').attr('value', '');
+                            $('#date_rule_start').attr('value', '');
+                        } else {
+                            $('#date_rule_start_label').show(100);
+                            $('#date_rule_end_label').show(100);
+                            alert ('НЕсработало')
+                        }
+                    });
                 </script>
-
-                <!--                    <script>-->
-                <!--            if ($('#persistent_rule').is(':checked')){-->
-                <!--                    $('#date_rule_start').hide(100);-->
-                <!--                    $('#date_rule_end').hide(100);-->
-                <!--            }-->
-                <!--                $('#persistent_rule').click(function(){-->
-                <!--            if ($(this).is(':checked')){-->
-                <!--                    $('#date_rule_start').hide(100);-->
-                <!--                    $('#date_rule_end').hide(100);-->
-                <!--                } else {-->
-                <!--                    $('#date_rule_start').show(100);-->
-                <!--                    $('#date_rule_end').show(100);-->
-                <!--                }-->
-                <!--            });-->
-                <!--        </script>-->
 
                 <p>Описание</p>
                 <textarea id="description_bid" name="description_bid" cols="100" rows="2"
