@@ -3,6 +3,7 @@ from .models import Bid
 from .forms import BidForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+# from docx import Document
 
 
 def about(request):
@@ -35,6 +36,7 @@ def create_html(request):
     error_bid = ''
     complete_bid = ''
     num_bid = ''
+    # doc_file = Document()
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
@@ -43,6 +45,8 @@ def create_html(request):
             num_bid = instance.num_bid
             instance.save()
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
+            # paragraph = doc_file.add_paragraph(instance.num_bid)
+            # doc_file.save(instance.num_bid+'.docx')
         else:
             error_bid = 'Форма была заполнена неверно'
 
