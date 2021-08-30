@@ -1,4 +1,5 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 {% block title %}Создание заявки HTML{% endblock %}
 {% block content %}
 <div class="container">
@@ -59,9 +60,6 @@
                     </select>
                 </div>
 
-                <!--            <label><input name="time_rule" type="radio" id="contactChoice1" checked value="temporary"/>Временное</label>-->
-                <!--            <label><input name="time_rule" type="radio" id="contactChoice2" value="constant"/>Постоянное</label><br><br>-->
-
             </div>
             <div>
                 <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
@@ -72,28 +70,10 @@
                 <label id="date_rule_end_label" for="date_rule_end"><input type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
+                <input type="hidden" id="persistent_rule_hidden" value=""/>
                 <input type="hidden" name="status_bid" id="status_bid" value="1"/>
 
-
-                <script>
-                    if ($('#persistent_rule').is(':checked')){
-                            $('#date_rule_start_label').hide(100);
-                            $('#date_rule_end_label').hide(100);
-                    }
-                        $('#persistent_rule').click(function(){
-                    if ($(this).is(':checked')){
-                            $('#date_rule_start_label').hide(100);
-                            $('#date_rule_end_label').hide(100);
-                            alert ('сработало')
-                            $('#date_rule_end').attr('value', '');
-                            $('#date_rule_start').attr('value', '');
-                        } else {
-                            $('#date_rule_start_label').show(100);
-                            $('#date_rule_end_label').show(100);
-                            alert ('НЕсработало')
-                        }
-                    });
-                </script>
+                <script src="{% static 'main/js/date_rule.js' %}"></script>
 
                 <p>Описание</p>
                 <textarea id="description_bid" name="description_bid" cols="100" rows="2"

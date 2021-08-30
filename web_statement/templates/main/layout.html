@@ -14,10 +14,10 @@
 {% if user.is_authenticated %}
         {% if user.last_name == '' or user.first_name == '' %}
         <p>Пользователь: {{ user }}</p>
-        <p><a href="{% url 'logout' %}?next={{request.path}}"">Выйти</a></p>
+        <p><a href="{% url 'logout' %}?next={{request.path}}">Выйти</a></p>
         {% else %}
         <p>Пользователь: {{ user.get_full_name }}</p>
-        <p><a href="{% url 'logout' %}?next={{request.path}}"">Выйти</a></p>
+        <p><a href="{% url 'logout' %}?next={{request.path}}">Выйти</a></p>
         {% endif %}
     {% else %}
 {% endif %}

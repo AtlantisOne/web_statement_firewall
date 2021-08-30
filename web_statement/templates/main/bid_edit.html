@@ -1,4 +1,5 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 {% block title %}Редактирование {{ bid_edit.num_bid }}{% endblock %}
 {% block content %}
 <div class="container">
@@ -54,8 +55,8 @@
                     </select>
                 </div>
                 <script>
-                  document.getElementById("protocol_bid").options[{{ bid_edit.protocol_bid.id }}-1].selected=true;
-
+                    "use strict";
+                    document.getElementById("protocol_bid").options[{{ bid_edit.protocol_bid.id }}-1].selected=true;
                 </script>
 
 
@@ -71,32 +72,8 @@
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ bid_edit.auth_user.id }}"/>
                 <input type="hidden" id="persistent_rule_hidden" value="{{ bid_edit.persistent_rule }}"/>
-                <script>
-                    if (document.getElementById("persistent_rule_hidden").value == 'True')
-                        {
-                        $('#date_rule_start_label').hide(100);
-                        $('#date_rule_end_label').hide(100);
-                        $("#persistent_rule").attr("checked","checked");
-                        }
-                        else
-                        {
-                        $("#persistent_rule").removeAttr("checked");
-                        }
-                            $('#persistent_rule').click(function(){
-                                if ($(this).is(':checked'))
-                                {
-                                $('#date_rule_start_label').hide(100);
-                                $('#date_rule_end_label').hide(100);
-                                $('#date_rule_end').attr('value', '');
-                                $('#date_rule_start').attr('value', '');
-                                }
-                                else
-                                {
-                                 $('#date_rule_start_label').show(100);
-                                 $('#date_rule_end_label').show(100);
-                                 }
-                                });
-                </script>
+
+                <script src="{% static 'main/js/date_rule.js' %}"></script>
 
                 <p>Описание</p>
                 <textarea id="description_bid" name="description_bid" cols="100" rows="2"
