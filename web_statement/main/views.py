@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
 
 
+def bid_template(request):
+    return render(request, 'main/about.html')
+
 def about(request):
     return render(request, 'main/about.html')
 
