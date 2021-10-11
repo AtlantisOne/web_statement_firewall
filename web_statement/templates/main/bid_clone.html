@@ -1,0 +1,89 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Создание заявки HTML{% endblock %}
+{% block content %}
+<div class="container">
+    <div>
+        <a href="{% url 'home' %}">Главная</a>
+        <form method="post">
+            {% csrf_token %}
+            <h3 class="main_h3">Создание заявки</h3>
+            <h3>{{ complete_bid }}</h3>
+            <h3>{{ error_bid }}</h3>
+            <div class="main">
+                <div>
+                    <p>Номер заявки</p>
+                    <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text" readonly
+                           value="Номер заявки">
+                </div>
+
+                <div>
+                    <p>Источник</p>
+                    <input value="{{ inputs.source_bid }}" id="source_bid" name="source_bid" class="source_bid" placeholder="Источник" type="text"
+                           size="16"
+                           pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+
+                </div>
+
+                <div>
+                    <p>Получатель</p>
+                    <input value="{{ inputs.recipient_bid }}" id="recipient_bid" name="recipient_bid" class="recipient_bid" placeholder="Получатель"
+                           type="text" size="16"
+                           pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
+                </div>
+
+                <div>
+                    <p>Порты</p>
+                    <input value="{{ inputs.port_bid }}" name="port_bid" id="port_bid" class="port_bid" placeholder="Порты" type="text"
+                           pattern="^[0-9]+$">
+                </div>
+
+                <div>
+                    <p>Протокол</p>
+                    <!-- Начально будет выбрано второе значение -->
+                    <select value="{{ inputs.protocol_bid.id }}" name="protocol_bid" id="protocol_bid">
+                        <!--Supplement an id here instead of using 'name'-->
+                        <option value="1">TCP</option>
+                        <option value="2">UDP</option>
+                        <option value="3">TCP/UDP</option>
+                    </select>
+                </div>
+                <script>
+                    "use strict";
+                    document.getElementById("protocol_bid").options[{{ inputs.protocol_bid.id }}-1].selected=true;
+                </script>
+
+            </div>
+            <div>
+                <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
+                                                    checked/>Постоянное</label><br><br>
+                <label id="date_rule_start_label" for="date_rule_start"><input type="date" name="date_rule_start" id="date_rule_start"/>
+                    Начальная
+                    дата действия</label><br>
+                <label id="date_rule_end_label" for="date_rule_end"><input type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
+                    действия</label>
+                <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
+                <input type="hidden" id="persistent_rule_hidden" value=""/>
+                <input type="hidden" name="status_bid" id="status_bid" value="1"/>
+
+                <script src="{% static 'main/js/date_rule.js' %}"></script>
+
+                <p>Описание</p>
+                <textarea id="description_bid" name="description_bid" cols="100" rows="2"
+                          placeholder="Описание">Описание</textarea>
+
+
+                <p>Обосноваине</p>
+                <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
+                          placeholder="Обоснование">Обоснование</textarea>
+                <br><br>
+
+                <div class="buttons_main">
+                    <button name="result_button" type="submit">Создать</button>
+                    <button type="reset">Очистить</button>
+                </div>
+        </form>
+    </div>
+
+
+    {% endblock %}

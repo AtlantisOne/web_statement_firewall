@@ -1,55 +1,113 @@
 from django.shortcuts import render
 from .models import Bid
 from .forms import BidForm
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
+from django.shortcuts import get_object_or_404
 
 
-def bid_template(request):
-    return render(request, 'main/about.html')
+# def about(request):
+#     return render(request, 'main/about.html')
 
-def about(request):
-    return render(request, 'main/about.html')
+
+# @login_required
+# def create_django(request):
+#     error_bid = ''
+#     complete_bid = ''
+#     if request.method == 'POST':
+#         form = BidForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             complete_bid = 'Заявка успешно добавлена'
+#         else:
+#             error_bid = 'Форма была заполнена неверно'
+#     form = BidForm()
+#     data = {
+#         'form': form,
+#         'error': error_bid,
+#         'complete_bid': complete_bid,
+#         # 'current_user': curr_user(request)
+#     }
+#     return render(request, 'main/create_django.html', data)
+
+
+def gen_num_bid():
+    pass
+
+def gen_docfile(data, request):
+    doc = DocxTemplate("bid.docx")
+
+    context = {'num_bid': data.num_bid,
+               'source_bid': data.source_bid,
+               'recipient_bid': data.recipient_bid,
+               'port_bid': data.port_bid,
+               'protocol_bid': data.protocol_bid,
+               'description_bid': data.description_bid,
+               'justification_bid': data.justification_bid,
+               'persistent_rule': data.persistent_rule,
+               'description_bid ': data.description_bid,
+               'date_rule_start': data.date_rule_start,
+               'date_rule_end': data.date_rule_end,
+               'auth_user': request.user.get_full_name()
+               }
+    doc.render(context)
+    doc.save(data.num_bid + '.docx')
 
 
 @login_required
-def create_django(request):
-    error_bid = ''
-    complete_bid = ''
-    if request.method == 'POST':
-        form = BidForm(request.POST)
-        if form.is_valid():
-            form.save()
-            complete_bid = 'Заявка успешно добавлена'
-        else:
-            error_bid = 'Форма была заполнена неверно'
-    form = BidForm()
-    data = {
-        'form': form,
-        'error': error_bid,
-        'complete_bid': complete_bid,
-        # 'current_user': curr_user(request)
-    }
-    return render(request, 'main/create_django.html', data)
-
-
-@login_required
-def create_html(request):
+def create_html(request, form=None):
     error_bid = ''
     complete_bid = ''
     num_bid = ''
-    doc = DocxTemplate("bid.docx")
+
     if request.method == 'POST':
         form = BidForm(request.POST)
         if form.is_valid():
             instance = form.save()
             instance.num_bid = "OP-" + str(instance.id)
             num_bid = instance.num_bid
+            gen_docfile(instance, request)
             instance.save()
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
+        else:
+            error_bid = 'Форма была заполнена неверно'
 
-            context = {'num_bid': instance.num_bid,
+    form = BidForm()
+    data = {
+        'form': form,
+        'error_bid': error_bid,
+        'complete_bid': complete_bid,
+        'num_bid': num_bid,
+    }
+    return render(request, 'main/create_html.html', data)
+
+@login_required
+def bid_clone(request, id):
+    error_bid = ''
+    complete_bid = ''
+    num_bid = ''
+    instance = get_object_or_404(Bid, id=id)
+
+    if request.method == 'POST':
+        form = BidForm(request.POST or None)
+        if form.is_valid():
+            instance = form.save()
+            instance.num_bid = "OP-" + str(instance.id)
+            num_bid = instance.num_bid
+            gen_docfile(instance, request)
+            instance.save()
+            complete_bid = f'Заявка успешно добавлена: {num_bid}'
+        else:
+            error_bid = 'Форма была заполнена неверно'
+
+    form = BidForm()
+    data = {
+        'form': form,
+        'error_bid': error_bid,
+        'complete_bid': complete_bid,
+        'num_bid': num_bid,
+        'inputs': {'num_bid': instance.num_bid,
                        'source_bid': instance.source_bid,
                        'recipient_bid': instance.recipient_bid,
                        'port_bid': instance.port_bid,
@@ -62,19 +120,8 @@ def create_html(request):
                        'date_rule_end': instance.date_rule_end,
                        'auth_user': request.user.get_full_name()
                        }
-            doc.render(context)
-            doc.save(instance.num_bid + '.docx')
-        else:
-            error_bid = 'Форма была заполнена неверно'
-
-    form = BidForm()
-    data = {
-        'form': form,
-        'error_bid': error_bid,
-        'complete_bid': complete_bid,
-        'num_bid': num_bid,
     }
-    return render(request, 'main/create_html.html', data)
+    return render(request, 'main/bid_clone.html', data)
 
 
 @login_required
@@ -103,7 +150,6 @@ class Bid_edit(UpdateView):
     fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
               'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid']
 
-
 class Bid_delete(DeleteView):
     model = Bid
     success_url = '/'
@@ -118,28 +164,6 @@ class Bid_delete(DeleteView):
 # def curr_user(request):
 #     current_user = request.user.id
 #     return current_user
-
-# @login_required
-# def create_html(request):
-#     error_bid = ''
-#     complete_bid = ''
-#     current_user = request.user.id
-#     if request.method == 'POST':
-#         form = BidForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             complete_bid = 'Заявка успешно добавлена'
-#         else:
-#             error_bid = 'Форма была заполнена неверно'
-#
-#     form = BidForm()
-#     data = {
-#         'form': form,
-#         'error': error_bid,
-#         'complete_bid': complete_bid,
-#         'current_user': current_user
-#     }
-#     return render(request, 'main/create_html.html', data)
 
 # class LoginView(View):
 #     def get(self, request, *args, **kwargs):
