@@ -17,6 +17,11 @@ class Bid(models.Model):
     date_rule_end = models.DateField('Дата окончания действия', null=True, blank=True)
     justification_bid = models.TextField('Обоснование', default='Обоснование')
     description_bid = models.TextField('Описание', default='Описание')
+    user_phone_bid = models.TextField('Телефон исполнителя', default='8-3532-000000', null=True, blank=True)
+    user_department_name_bid = models.TextField('Наименование СП исполнителя', default='Наименование СП исполнителя', null=True, blank=True)
+    boss_department_name_bid = models.TextField('Наименование СП руководителя', default='Наименование СП руководителя', null=True, blank=True)
+    boss_full_name_bid = models.TextField('Фамилия И.О. руководителя', default='Фамилия И.О. руководителя', null=True, blank=True)
+
 
     def __str__(self):
         return self.num_bid
