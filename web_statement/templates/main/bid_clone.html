@@ -7,7 +7,7 @@
         <a href="{% url 'home' %}">Главная</a>
         <form method="post">
             {% csrf_token %}
-            <h3 class="main_h3">Создание заявки</h3>
+            <h3 class="main_h3">Клонирование заявки: {{ inputs.num_bid }}</h3>
             <h3>{{ complete_bid }}</h3>
             <h3>{{ error_bid }}</h3>
             <div class="main">
@@ -56,30 +56,30 @@
             </div>
             <div>
                 <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
-                                                    checked/>Постоянное</label><br><br>
-                <label id="date_rule_start_label" for="date_rule_start"><input type="date" name="date_rule_start" id="date_rule_start"/>
+                                                    />Постоянное</label><br><br>
+                <label id="date_rule_start_label" for="date_rule_start"><input value="{{ inputs.date_rule_start }}" type="date" name="date_rule_start" id="date_rule_start"/>
                     Начальная
                     дата действия</label><br>
-                <label id="date_rule_end_label" for="date_rule_end"><input type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
+                <label id="date_rule_end_label" for="date_rule_end"><input value="{{ inputs.date_rule_end }}" type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
-                <input type="hidden" id="persistent_rule_hidden" value=""/>
                 <input type="hidden" name="status_bid" id="status_bid" value="1"/>
+                <input type="hidden" id="persistent_rule_hidden" value="{{ inputs.persistent_rule }}"/>
 
                 <script src="{% static 'main/js/date_rule.js' %}"></script>
 
                 <p>Описание</p>
                 <textarea id="description_bid" name="description_bid" cols="100" rows="2"
-                          placeholder="Описание">Описание</textarea>
+                          placeholder="Описание">{{ inputs.description_bid }}</textarea>
 
 
                 <p>Обосноваине</p>
                 <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
-                          placeholder="Обоснование">Обоснование</textarea>
+                          placeholder="Обоснование">{{ inputs.justification_bid }}</textarea>
                 <br><br>
 
                 <div class="buttons_main">
-                    <button name="result_button" type="submit">Создать</button>
+                    <button name="result_button" type="submit">Клонировать</button>
                     <button type="reset">Очистить</button>
                 </div>
         </form>

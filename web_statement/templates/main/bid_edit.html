@@ -10,13 +10,11 @@
             <h3 class="main_h3">Редактирование: {{ bid_edit.num_bid }}</h3>
             <h3>{{ complete_bid }}</h3>
             <h3>{{ error_bid }}</h3>
-            <h3>{{ auth_user_id }}</h3>
             <div class="main">
                 <div>
                     <p>Номер заявки</p>
-                    <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text"
+                    <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text" readonly
                            value="{{ bid_edit.num_bid }}">
-
                 </div>
 
                 <div>
