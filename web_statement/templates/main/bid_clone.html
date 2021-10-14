@@ -19,7 +19,8 @@
 
                 <div>
                     <p>Источник</p>
-                    <input value="{{ inputs.source_bid }}" id="source_bid" name="source_bid" class="source_bid" placeholder="Источник" type="text"
+                    <input value="{{ inputs.source_bid }}" id="source_bid" name="source_bid" class="source_bid"
+                           placeholder="Источник" type="text"
                            size="16"
                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
 
@@ -27,14 +28,16 @@
 
                 <div>
                     <p>Получатель</p>
-                    <input value="{{ inputs.recipient_bid }}" id="recipient_bid" name="recipient_bid" class="recipient_bid" placeholder="Получатель"
+                    <input value="{{ inputs.recipient_bid }}" id="recipient_bid" name="recipient_bid"
+                           class="recipient_bid" placeholder="Получатель"
                            type="text" size="16"
                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$">
                 </div>
 
                 <div>
                     <p>Порты</p>
-                    <input value="{{ inputs.port_bid }}" name="port_bid" id="port_bid" class="port_bid" placeholder="Порты" type="text"
+                    <input value="{{ inputs.port_bid }}" name="port_bid" id="port_bid" class="port_bid"
+                           placeholder="Порты" type="text"
                            pattern="^[0-9]+$">
                 </div>
 
@@ -51,16 +54,21 @@
                 <script>
                     "use strict";
                     document.getElementById("protocol_bid").options[{{ inputs.protocol_bid.id }}-1].selected=true;
+
                 </script>
 
             </div>
             <div>
                 <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
-                                                    />Постоянное</label><br><br>
-                <label id="date_rule_start_label" for="date_rule_start"><input value="{{ inputs.date_rule_start }}" type="date" name="date_rule_start" id="date_rule_start"/>
+                />Постоянное</label><br><br>
+                <label id="date_rule_start_label" for="date_rule_start"><input value="{{ inputs.date_rule_start }}"
+                                                                               type="date" name="date_rule_start"
+                                                                               id="date_rule_start"/>
                     Начальная
                     дата действия</label><br>
-                <label id="date_rule_end_label" for="date_rule_end"><input value="{{ inputs.date_rule_end }}" type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
+                <label id="date_rule_end_label" for="date_rule_end"><input value="{{ inputs.date_rule_end }}"
+                                                                           type="date" name="date_rule_end"
+                                                                           id="date_rule_end"/> Конечная дата
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
                 <input type="hidden" name="status_bid" id="status_bid" value="1"/>
@@ -76,6 +84,35 @@
                 <p>Обосноваине</p>
                 <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
                           placeholder="Обоснование">{{ inputs.justification_bid }}</textarea>
+                <br><br>
+                <div class="main">
+                    <div>
+                        <p>Наименование СП исполнителя</p>
+                        <input id="user_department_name_bid" name="user_department_name_bid"
+                               class="user_department_name_bid" placeholder="" type="text"
+                               value="{{ inputs.user_department_name_bid }}">
+                    </div>
+                    <div>
+                        <p>Телефон исполнителя</p>
+                        <input id="user_phone_bid" name="user_phone_bid" class="user_phone_bid" placeholder=""
+                               type="text"
+                               value="{{ inputs.user_phone_bid }}">
+                    </div>
+                </div>
+                <div class="main">
+                    <div>
+                        <p>Наименование СП руководителя</p>
+                        <input id="boss_department_name_bid" name="boss_department_name_bid"
+                               class="boss_department_name_bid" placeholder="" type="text"
+                               value="{{ inputs.boss_department_name_bid }}">
+                    </div>
+                    <div>
+                        <p>Фамилия И.О. руководителя</p>
+                        <input id="boss_full_name_bid" name="boss_full_name_bid" class="boss_full_name_bid"
+                               placeholder="" type="text"
+                               value="{{ inputs.boss_full_name_bid }}">
+                    </div>
+                </div>
                 <br><br>
 
                 <div class="buttons_main">

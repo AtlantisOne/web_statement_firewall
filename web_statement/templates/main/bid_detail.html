@@ -17,6 +17,10 @@
     <p>{{ bid_detail.date_rule_end }}</p>
     <p>{{ bid_detail.justification_bid }}</p>
     <p>{{ bid_detail.description_bid }}</p>
+    <p>{{ bid_detail.user_phone_bid }}</p>
+    <p>{{ bid_detail.user_department_name_bid }}</p>
+    <p>{{ bid_detail.boss_department_name_bid }}</p>
+    <p>{{ bid_detail.boss_full_name_bid }}</p>
 
     <a href="{% url 'bid_edit' bid_detail.id %}">Редактировать</a>
     <a href="{% url 'bid_clone' bid_detail.id %}">Клонировать заявку</a>

@@ -6,7 +6,8 @@ class BidForm(ModelForm):
     class Meta:
         model = Bid
         fields = ['auth_user', 'num_bid', 'status_bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
-                  'persistent_rule', 'date_rule_start', 'date_rule_end', 'justification_bid', 'description_bid']
+                  'persistent_rule', 'date_rule_start', 'date_rule_end', 'justification_bid', 'description_bid',
+                  'user_phone_bid', 'user_department_name_bid', 'boss_department_name_bid', 'boss_full_name_bid']
         widgets = {
             'num_bid': TextInput(attrs={
                 'placeholder': "Номер заявки"

@@ -55,6 +55,7 @@
                 <script>
                     "use strict";
                     document.getElementById("protocol_bid").options[{{ bid_edit.protocol_bid.id }}-1].selected=true;
+
                 </script>
 
 
@@ -62,11 +63,15 @@
             <div>
                 <label for="persistent_rule"><input name="persistent_rule"
                                                     type="checkbox" id="persistent_rule"
-                                                    />Постоянное</label><br><br>
-                <label id="date_rule_start_label" for="date_rule_start"><input value="{{ bid_edit.date_rule_start }}" type="date" name="date_rule_start" id="date_rule_start"/>
+                />Постоянное</label><br><br>
+                <label id="date_rule_start_label" for="date_rule_start"><input value="{{ bid_edit.date_rule_start }}"
+                                                                               type="date" name="date_rule_start"
+                                                                               id="date_rule_start"/>
                     Начальная
                     дата действия</label><br>
-                <label id="date_rule_end_label" for="date_rule_end"><input value="{{ bid_edit.date_rule_end }}" type="date" name="date_rule_end" id="date_rule_end"/> Конечная дата
+                <label id="date_rule_end_label" for="date_rule_end"><input value="{{ bid_edit.date_rule_end }}"
+                                                                           type="date" name="date_rule_end"
+                                                                           id="date_rule_end"/> Конечная дата
                     действия</label>
                 <input type="hidden" name="auth_user" id="auth_user" value="{{ bid_edit.auth_user.id }}"/>
                 <input type="hidden" id="persistent_rule_hidden" value="{{ bid_edit.persistent_rule }}"/>
@@ -81,6 +86,35 @@
                 <p>Обосноваине</p>
                 <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
                           placeholder="Обоснование">{{ bid_edit.justification_bid }}</textarea>
+                <br><br>
+                <div class="main">
+                    <div>
+                        <p>Наименование СП исполнителя</p>
+                        <input id="user_department_name_bid" name="user_department_name_bid"
+                               class="user_department_name_bid" placeholder="" type="text"
+                               value="{{ bid_edit.user_department_name_bid }}">
+                    </div>
+                    <div>
+                        <p>Телефон исполнителя</p>
+                        <input id="user_phone_bid" name="user_phone_bid" class="user_phone_bid" placeholder=""
+                               type="text"
+                               value="{{ bid_edit.user_phone_bid }}">
+                    </div>
+                </div>
+                <div class="main">
+                    <div>
+                        <p>Наименование СП руководителя</p>
+                        <input id="boss_department_name_bid" name="boss_department_name_bid"
+                               class="boss_department_name_bid" placeholder="" type="text"
+                               value="{{ bid_edit.boss_department_name_bid }}">
+                    </div>
+                    <div>
+                        <p>Фамилия И.О. руководителя</p>
+                        <input id="boss_full_name_bid" name="boss_full_name_bid" class="boss_full_name_bid"
+                               placeholder="" type="text"
+                               value="{{ bid_edit.boss_full_name_bid }}">
+                    </div>
+                </div>
                 <br><br>
 
                 <div class="buttons_main">

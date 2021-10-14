@@ -35,6 +35,7 @@ from django.shortcuts import get_object_or_404
 def gen_num_bid():
     pass
 
+
 def gen_docfile(data, request):
     doc = DocxTemplate("bid.docx")
 
@@ -49,7 +50,12 @@ def gen_docfile(data, request):
                'description_bid ': data.description_bid,
                'date_rule_start': data.date_rule_start,
                'date_rule_end': data.date_rule_end,
-               'auth_user': request.user.get_full_name()
+               'auth_user': request.user.get_full_name(),
+               'email_user': request.user.email,
+               'user_phone_bid': data.user_phone_bid,
+               'user_department_name_bid': data.user_department_name_bid,
+               'boss_department_name_bid': data.boss_department_name_bid,
+               'boss_full_name_bid': data.boss_full_name_bid
                }
     doc.render(context)
     doc.save(data.num_bid + '.docx')
@@ -82,6 +88,7 @@ def create_html(request, form=None):
     }
     return render(request, 'main/create_html.html', data)
 
+
 @login_required
 def bid_clone(request, id):
     error_bid = ''
@@ -108,18 +115,23 @@ def bid_clone(request, id):
         'complete_bid': complete_bid,
         'num_bid': num_bid,
         'inputs': {'num_bid': instance.num_bid,
-                       'source_bid': instance.source_bid,
-                       'recipient_bid': instance.recipient_bid,
-                       'port_bid': instance.port_bid,
-                       'protocol_bid': instance.protocol_bid,
-                       'description_bid': instance.description_bid,
-                       'justification_bid': instance.justification_bid,
-                       'persistent_rule': instance.persistent_rule,
-                       'description_bid ': instance.description_bid,
-                       'date_rule_start': instance.date_rule_start,
-                       'date_rule_end': instance.date_rule_end,
-                       'auth_user': request.user.get_full_name()
-                       }
+                   'source_bid': instance.source_bid,
+                   'recipient_bid': instance.recipient_bid,
+                   'port_bid': instance.port_bid,
+                   'protocol_bid': instance.protocol_bid,
+                   'description_bid': instance.description_bid,
+                   'justification_bid': instance.justification_bid,
+                   'persistent_rule': instance.persistent_rule,
+                   'description_bid ': instance.description_bid,
+                   'date_rule_start': instance.date_rule_start,
+                   'date_rule_end': instance.date_rule_end,
+                   'auth_user': request.user.get_full_name(),
+                   'email_user': request.user.email,
+                   'user_phone_bid': instance.user_phone_bid,
+                   'user_department_name_bid': instance.user_department_name_bid,
+                   'boss_department_name_bid': instance.boss_department_name_bid,
+                   'boss_full_name_bid': instance.boss_full_name_bid
+                   }
     }
     return render(request, 'main/bid_clone.html', data)
 
@@ -148,7 +160,10 @@ class Bid_edit(UpdateView):
     template_name = 'main/bid_edit.html'
     context_object_name = 'bid_edit'
     fields = ['num_bid', 'auth_user', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',
-              'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid']
+              'persistent_rule', 'date_rule_start', 'date_rule_end', 'description_bid', 'justification_bid',
+              'user_phone_bid', 'user_department_name_bid', 'boss_department_name_bid',
+              'boss_full_name_bid']
+
 
 class Bid_delete(DeleteView):
     model = Bid
