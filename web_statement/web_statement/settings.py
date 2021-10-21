@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'main',
     'crispy_forms',
     'django.contrib.admin',
@@ -83,18 +84,11 @@ DATABASES = {
         'NAME': 'db_web_statement',
         'USER': 'db_web_statement',
         'PASSWORD': '354657',
-        # 'HOST': 'minimonetaz1.ddns.net',
-        'HOST': '192.168.25.211',
+        'HOST': 'minimonetaz1.ddns.net',
+        # 'HOST': '192.168.25.211',
         'PORT': '5432'
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # Password validation
@@ -145,6 +139,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'accounts.User'
 
 # Added by yourself
 ROOT_URLCONF = 'web_statement.urls'
