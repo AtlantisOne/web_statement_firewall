@@ -28,6 +28,24 @@ class Bid(models.Model):
             return 'Постоянно'
         return 'Временно'
 
+    def get_date_rule(self, field='date_rule_start'):
+        if field == 'date_rule_start':
+            date_str = str(self.date_rule_start)
+            return f'«{date_str[8:10]}»   {date_str[5:7]}   {date_str[0:4]}г.'
+        return 'Не зашло'
+
+        # if self.date_rule_start == None:
+        #     return ''
+        # date_str = str(self.date_rule_start)
+        # return f'«{date_str[8:10]}»   {date_str[5:7]}   {date_str[0:4]}г.'
+        # if self.date_rule_start:
+        #     return f'{self.date_rule_start[::-1]}'
+        #
+        # if self.date_rule_end:
+        #     return f'{self.date_rule_end[::-1]}'
+
+
+
     def __str__(self):
         return self.num_bid
 
