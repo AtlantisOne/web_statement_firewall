@@ -5,6 +5,7 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
 from django.shortcuts import get_object_or_404
+import datetime
 
 
 # def about(request):
@@ -46,7 +47,7 @@ def gen_docfile(data, request):
                'protocol_bid': data.protocol_bid,
                'description_bid': data.description_bid,
                'justification_bid': data.justification_bid,
-               'persistent_rule': data.persistent_rule,
+               'persistent_rule': data.get_persistent_rule(),
                'description_bid ': data.description_bid,
                'date_rule_start': data.date_rule_start,
                'date_rule_end': data.date_rule_end,
@@ -55,7 +56,8 @@ def gen_docfile(data, request):
                'user_phone_bid': data.user_phone_bid,
                'user_department_name_bid': data.user_department_name_bid,
                'boss_department_name_bid': data.boss_department_name_bid,
-               'boss_full_name_bid': data.boss_full_name_bid
+               'boss_full_name_bid': data.boss_full_name_bid,
+               'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '«%d»   %m   %Yг.')
                }
     doc.render(context)
     doc.save(data.num_bid + '.docx')
@@ -122,7 +124,7 @@ def bid_clone(request, id):
                    'description_bid': instance.description_bid,
                    'justification_bid': instance.justification_bid,
                    'persistent_rule': instance.persistent_rule,
-                   'description_bid ': instance.description_bid,
+                   'description_bid': instance.description_bid,
                    'date_rule_start': instance.date_rule_start,
                    'date_rule_end': instance.date_rule_end,
                    'auth_user': request.user.get_full_name(),

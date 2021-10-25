@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': 'db_web_statement',
         'USER': 'db_web_statement',
         'PASSWORD': '354657',
-        'HOST': 'minimonetaz1.ddns.net',
-        # 'HOST': '192.168.25.211',
+        # 'HOST': 'minimonetaz1.ddns.net',
+        'HOST': '192.168.25.211',
         'PORT': '5432'
     }
 }

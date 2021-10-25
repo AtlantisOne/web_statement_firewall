@@ -23,6 +23,11 @@ class Bid(models.Model):
     boss_full_name_bid = models.TextField('Фамилия И.О. руководителя', default='Фамилия И.О. руководителя', null=True, blank=True)
 
 
+    def get_persistent_rule(self):
+        if self.persistent_rule == True:
+            return 'Постоянно'
+        return 'Временно'
+
     def __str__(self):
         return self.num_bid
 
