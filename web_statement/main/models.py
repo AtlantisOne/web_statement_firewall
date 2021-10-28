@@ -68,6 +68,25 @@ class Status_bid_class(models.Model):
     def __str__(self):
         return self.title
 
+class Signers_bid:
+    role = models.CharField('Роль согласующего', max_length=300)
+    position = models.CharField('Должность согласующего', max_length=300)
+    full_name = models.CharField('ФИО согласующего', max_length=300)
+    organization = models.ForeignKey('Organization_signers', on_delete=models.CASCADE, )
+    row_number = models.PositiveIntegerField('Номер колонки в шаблоне')
+
+    def __str__(self):
+        return self.organization
+
+
+    class Organization_signers(models.Model):
+        title = models.CharField('Организация', max_length=300)
+
+        def __str__(self):
+            return self.title
+
+
+
     # from django.utils import timezone
 
     # class User(models.Model):
