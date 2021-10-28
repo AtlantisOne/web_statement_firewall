@@ -49,15 +49,15 @@ def gen_docfile(data, request):
                'justification_bid': data.justification_bid,
                'persistent_rule': data.get_persistent_rule(),
                'description_bid ': data.description_bid,
-               'date_rule_start': data.date_rule_start,
-               'date_rule_end': data.date_rule_end,
+               'date_rule_start': data.get_date_rule_start(),
+               'date_rule_end': data.get_date_rule_end(),
                'auth_user': request.user.get_full_name(),
                'email_user': request.user.email,
                'user_phone_bid': data.user_phone_bid,
                'user_department_name_bid': data.user_department_name_bid,
                'boss_department_name_bid': data.boss_department_name_bid,
                'boss_full_name_bid': data.boss_full_name_bid,
-               'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '«%d»   %m   %Yг.')
+               'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '« %d »   %m   %Yг.')
                }
     doc.render(context)
     doc.save(data.num_bid + '.docx')
