@@ -1,0 +1,16 @@
+[
+  {
+    "model": "main.Organization",
+    "fields": {
+      "id": "1",
+      "title": "АО «Оренбургнефть»"
+    }
+  },
+  {
+    "model": "main.Organization",
+    "fields": {
+      "id": "2",
+      "title": "РН-БГПП"
+    }
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "1",
+      "title": "СБ/ПБ ОГ"
+    }
+  },
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "2",
+      "title": "Владелец ИА"
+    }
+  },
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "3",
+      "title": "СП ИТ/СП ОГ"
+    }
+  }
+]
