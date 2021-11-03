@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from .models import Bid
+from .models import Bid, Signers_bid
 from .forms import BidForm
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
 from django.shortcuts import get_object_or_404
 import datetime
+import jinja2
 
 
 # def about(request):
@@ -37,7 +38,7 @@ def gen_num_bid():
     pass
 
 
-def gen_docfile(data, request):
+def gen_docfile(request, data, signers=None):
     doc = DocxTemplate("bid.docx")
 
     context = {'num_bid': data.num_bid,
@@ -57,6 +58,7 @@ def gen_docfile(data, request):
                'user_department_name_bid': data.user_department_name_bid,
                'boss_department_name_bid': data.boss_department_name_bid,
                'boss_full_name_bid': data.boss_full_name_bid,
+               'signers': signers,
                'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '« %d »   %m   %Yг.')
                }
     doc.render(context)
@@ -75,7 +77,8 @@ def create_html(request, form=None):
             instance = form.save()
             instance.num_bid = "OP-" + str(instance.id)
             num_bid = instance.num_bid
-            gen_docfile(instance, request)
+            signers = Signers_bid.objects.all()
+            gen_docfile(request, instance, signers)
             instance.save()
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
         else:

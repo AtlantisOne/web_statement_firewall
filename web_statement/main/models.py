@@ -34,13 +34,13 @@ class Bid(models.Model):
 
     def get_date_rule_start(self):
         if self.date_rule_start == None:
-            return ''
+            return '«___» _____________ 20__г.'
         date_str = str(self.date_rule_start)
         return f'« {date_str[8:10]} »   {date_str[5:7]}   {date_str[0:4]}г.'
 
     def get_date_rule_end(self):
         if self.date_rule_end == None:
-            return ''
+            return '«___» _____________ 20__г.'
         date_str = str(self.date_rule_end)
         return f'« {date_str[8:10]} »   {date_str[5:7]}   {date_str[0:4]}г.'
 
