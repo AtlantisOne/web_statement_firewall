@@ -107,7 +107,8 @@ def bid_clone(request, id):
             instance = form.save()
             instance.num_bid = "OP-" + str(instance.id)
             num_bid = instance.num_bid
-            gen_docfile(instance, request)
+            signers = Signers_bid.objects.all()
+            gen_docfile(request, instance, signers)
             instance.save()
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
         else:
