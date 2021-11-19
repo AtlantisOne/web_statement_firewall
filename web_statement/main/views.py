@@ -39,7 +39,8 @@ def gen_num_bid():
 
 
 def gen_docfile(request, data, signers=None):
-    doc = DocxTemplate("bid.docx")
+    doc = DocxTemplate("main/docs/bid.docx")
+    filepath = r'main/docs/' + data.num_bid + '.docx'
 
     context = {'num_bid': data.num_bid,
                'source_bid': data.source_bid,
@@ -62,7 +63,7 @@ def gen_docfile(request, data, signers=None):
                'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '« %d »   %m   %Yг.')
                }
     doc.render(context)
-    doc.save(data.num_bid + '.docx')
+    doc.save(filepath)
 
 
 @login_required
