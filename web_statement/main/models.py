@@ -10,10 +10,6 @@ class Bid(models.Model):
     status_bid = models.ForeignKey('Status_bid_class', on_delete=models.CASCADE, )
     auth_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
                                   related_name='User')
-    source_bid = models.GenericIPAddressField('Источник', default='192.168.0.1')
-    recipient_bid = models.GenericIPAddressField('Получатель', default='192.168.0.2')
-    port_bid = models.IntegerField('Порт', default='3389')
-    protocol_bid = models.ForeignKey('Protocol_bid_class', on_delete=models.CASCADE, )
     persistent_rule = models.BooleanField('Постоянное правило', default=True)
     date_rule_start = models.DateField('Дата начала действия', null=True, blank=True)
     date_rule_end = models.DateField('Дата окончания действия', null=True, blank=True)
@@ -67,6 +63,16 @@ class Status_bid_class(models.Model):
 
     def __str__(self):
         return self.title
+
+class Rule(models.Model):
+    bid = models.ForeignKey('Bid', on_delete=models.CASCADE, )
+    source_bid = models.GenericIPAddressField('Источник', default='192.168.0.1')
+    recipient_bid = models.GenericIPAddressField('Получатель', default='192.168.0.2')
+    port_bid = models.IntegerField('Порт', default='3389')
+    protocol_bid = models.ForeignKey('Protocol_bid_class', on_delete=models.CASCADE, )
+
+    def __str__(self):
+        return self.bid
 
 
 class Signers_bid(models.Model):
