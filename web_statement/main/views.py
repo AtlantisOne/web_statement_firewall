@@ -1,12 +1,14 @@
-from django.shortcuts import render
-from .models import Bid, Signers_bid
-from .forms import BidForm
+from django.shortcuts import render, HttpResponseRedirect, redirect
+from .models import Bid, Signers_bid, Rule
+from .forms import BidForm, RuleForm, RuleFormset
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
 from django.shortcuts import get_object_or_404
 import datetime
 import jinja2
+from django.urls import reverse
+from django.views import generic
 
 
 # def about(request):
@@ -68,31 +70,46 @@ def gen_docfile(request, data, signers=None):
 
 @login_required
 def create_html(request, form=None):
+    template_name = 'main/create_html.html'
     error_bid = ''
     complete_bid = ''
     num_bid = ''
 
-    if request.method == 'POST':
-        form = BidForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
+    if request.method == 'GET':
+        form_bid = BidForm(request.GET or None)
+        form_rule = RuleFormset(queryset=Rule.objects.none())
+
+    elif request.method == 'POST':
+        form_bid = BidForm(request.POST)
+        form_rule = RuleFormset(request.POST)
+        if form_bid.is_valid() and form_rule.is_valid():
+            instance = form_bid.save()
             instance.num_bid = "OP-" + str(instance.id)
+            instance.status_bid_id = 2
+            instance.auth_user = request.user
             num_bid = instance.num_bid
             signers = Signers_bid.objects.all()
-            gen_docfile(request, instance, signers)
+            # gen_docfile(request, instance, signers)
             instance.save()
+
+            for form_r in form_rule:
+                rule = form_r.save(commit=False)
+                rule.instance = instance
+                rule.bid_id = instance.id
+                rule.save()
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
+            # return redirect('main:create_html')
         else:
             error_bid = 'Форма была заполнена неверно'
 
-    form = BidForm()
     data = {
-        'form': form,
+        'form_bid': form_bid,
+        'form_rule': form_rule,
         'error_bid': error_bid,
         'complete_bid': complete_bid,
         'num_bid': num_bid,
     }
-    return render(request, 'main/create_html.html', data)
+    return render(request, template_name, data)
 
 
 @login_required
