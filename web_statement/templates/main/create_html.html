@@ -10,63 +10,107 @@
             <h3 class="main_h3">Создание заявки</h3>
             <h3>{{ complete_bid }}</h3>
             <h3>{{ error_bid }}</h3>
+            <div>
+                <p>Номер заявки</p>
+                <input id="num_bid" name="num_bid" class="num_bid" placeholder="Номер заявки" type="text" readonly
+                       value="Номер заявки">
+            </div>
             <div class="main">
-                <div>
+
+                <div class="">
+                    {{ form_rule.management_form }}
+                    {% for form in form_rule %}
+                    <div class="row form-row spacer">
+                        <div class="col-4">
+                            <div class="main">
+                                <div>
+                                    <p>Источник</p>
+                                    {{form.source_bid}}
+                                </div>
+                                <div>
+                                    <p>Получатель</p>
+                                    {{form.recipient_bid}}
+                                </div>
+                                <div>
+                                    <p>Порты</p>
+                                    {{form.port_bid}}
+                                </div>
+                                <div>
+                                    <p>Протокол</p>
+                                    {{form.protocol_bid}}
+                                </div>
+                                <div class="input-group-append">
+                                    <br><br>
+                                    <button class="btn btn-success add-form-row">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+            <div>
+                <label for="persistent_rule"><input name="persistent_rule" type="checkbox" id="persistent_rule"
+                                                    checked/>Постоянное</label><br><br>
+                <label id="date_rule_start_label" for="date_rule_start"><input type="date" name="date_rule_start"
+                                                                               id="date_rule_start"/>
+                    Начальная
+                    дата действия</label><br>
+                <label id="date_rule_end_label" for="date_rule_end"><input type="date" name="date_rule_end"
+                                                                           id="date_rule_end"/> Конечная дата
+                    действия</label>
+                <input type="hidden" name="auth_user" id="auth_user" value="{{ request.user.id }}"/>
+                <input type="hidden" id="persistent_rule_hidden" value=""/>
+                <input type="hidden" name="status_bid" id="status_bid" value="1"/>
+
+                <script src="{% static 'main/js/date_rule.js' %}"></script>
+
+                <p>Описание</p>
+                <textarea id="description_bid" name="description_bid" cols="100" rows="2"
+                          placeholder="Описание">Описание</textarea>
+
+
+                <p>Обосноваине</p>
+                <textarea id="justification_bid" name="justification_bid" cols="100" rows="2"
+                          placeholder="Обоснование">Обоснование</textarea>
+                <br><br>
+                <div class="main">
                     <div>
-                        {{ form_bid.management_form }}
-                        <p>Постоянное правило</p>
-                        {{form_bid.persistent_rule}}
-                        <br>
-                        <p>Начальная дата действия</p>
-                        {{form_bid.date_rule_start}}
-                        <p>Конечная дата действия</p>
-                        {{form_bid.date_rule_end}}
-                        <p>Обосноваине</p>
-                        {{form_bid.justification_bid}}
-                        <p>Описание</p>
-                        {{form_bid.description_bid}}
-                        <p>Телефон исполнителя</p>
-                        {{form_bid.user_phone_bid}}
                         <p>Наименование СП исполнителя</p>
-                        {{form_bid.user_department_name_bid}}
+                        <input id="user_department_name_bid" name="user_department_name_bid"
+                               class="user_department_name_bid" placeholder="" type="text"
+                               value="Оренбургское РПУ ООО ИК «Сибинтек»">
+                    </div>
+                    <div>
+                        <p>Телефон исполнителя</p>
+                        <input id="user_phone_bid" name="user_phone_bid" class="user_phone_bid" placeholder=""
+                               type="text"
+                               value="{{ request.user.user_phone }}">
+                    </div>
+                </div>
+                <div class="main">
+                    <div>
                         <p>Наименование СП руководителя</p>
-                        {{form_bid.boss_department_name_bid}}
+                        <input id="boss_department_name_bid" name="boss_department_name_bid"
+                               class="boss_department_name_bid" placeholder="" type="text"
+                               value="Оренбургское РПУ ООО ИК «Сибинтек»">
+                    </div>
                     <div>
                         <p>Фамилия И.О. руководителя</p>
                         <input id="boss_full_name_bid" name="boss_full_name_bid" class="boss_full_name_bid"
                                placeholder="" type="text"
                                value="">
                     </div>
-                    </div>
                 </div>
 
-            </div>
-            {{ form_rule.management_form }}
-            {% for form in form_rule %}
-            <div class="row form-row spacer">
-                <div class="col-4">
-                    <div class="main">
-                        <p>Источник</p>
-                        {{form.source_bid}}
-                        <p>Получатель</p>
-                        {{form.recipient_bid}}
-                        <p>Порты</p>
-                        {{form.port_bid}}
-                        <p>Протокол</p>
-                        {{form.protocol_bid}}
-                        <div class="input-group-append">
-                            <button class="btn btn-success add-form-row">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            <div class="row spacer">
-                <div class="col-4 offset-2">
-                    <button type="submit" class="btn btn-block btn-primary">Создать</button>
+                <br><br>
+
+                <div class="buttons_main">
+                    <button name="result_button" type="submit" class="btn btn-block btn-primary">Создать</button>
                     <button type="reset" class="btn btn-block btn-primary">Очистить</button>
                 </div>
-            </div>
         </form>
     </div>
     {% endblock %}
