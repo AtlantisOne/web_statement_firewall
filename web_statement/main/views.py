@@ -40,27 +40,28 @@ def gen_num_bid():
     pass
 
 
-def gen_docfile(request, data, signers=None):
+def gen_docfile(request, instance, rules, signers=None):
     doc = DocxTemplate("main/docs/bid.docx")
-    filepath = r'main/docs/' + data.num_bid + '.docx'
+    filepath = r'main/docs/' + instance.num_bid + '.docx'
 
-    context = {'num_bid': data.num_bid,
-               'source_bid': data.source_bid,
-               'recipient_bid': data.recipient_bid,
-               'port_bid': data.port_bid,
-               'protocol_bid': data.protocol_bid,
-               'description_bid': data.description_bid,
-               'justification_bid': data.justification_bid,
-               'persistent_rule': data.get_persistent_rule(),
-               'description_bid ': data.description_bid,
-               'date_rule_start': data.get_date_rule_start(),
-               'date_rule_end': data.get_date_rule_end(),
+    context = {'num_bid': instance.num_bid,
+               # 'source_bid': rules.source_bid,
+               # 'recipient_bid': rules.recipient_bid,
+               # 'port_bid': rules.port_bid,
+               # 'protocol_bid': rules.protocol_bid,
+               'rules': rules,
+               'description_bid': instance.description_bid,
+               'justification_bid': instance.justification_bid,
+               'persistent_rule': instance.get_persistent_rule(),
+               'description_bid ': instance.description_bid,
+               'date_rule_start': instance.get_date_rule_start(),
+               'date_rule_end': instance.get_date_rule_end(),
                'auth_user': request.user.get_full_name(),
                'email_user': request.user.email,
-               'user_phone_bid': data.user_phone_bid,
-               'user_department_name_bid': data.user_department_name_bid,
-               'boss_department_name_bid': data.boss_department_name_bid,
-               'boss_full_name_bid': data.boss_full_name_bid,
+               'user_phone_bid': instance.user_phone_bid,
+               'user_department_name_bid': instance.user_department_name_bid,
+               'boss_department_name_bid': instance.boss_department_name_bid,
+               'boss_full_name_bid': instance.boss_full_name_bid,
                'signers': signers,
                'curr_date': datetime.datetime.strftime(datetime.datetime.now(), '« %d »   %m   %Yг.')
                }
@@ -89,7 +90,6 @@ def create_html(request, form=None):
             instance.auth_user = request.user
             num_bid = instance.num_bid
             signers = Signers_bid.objects.all()
-            # gen_docfile(request, instance, signers)
             instance.save()
 
             for form_r in form_rule:
@@ -97,6 +97,8 @@ def create_html(request, form=None):
                 rule.instance = instance
                 rule.bid_id = instance.id
                 rule.save()
+            rules = Rule.objects.filter(bid=instance.id)
+            gen_docfile(request, instance, rules, signers)
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
             # return redirect('main:create_html')
         else:

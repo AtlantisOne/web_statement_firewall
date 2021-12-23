@@ -82,7 +82,7 @@ class Signers_bid(models.Model):
     organization = models.ForeignKey('Organization', on_delete=models.CASCADE, )
 
     def __str__(self):
-        return self.organization
+        return self.position
 
 
 class Organization(models.Model):

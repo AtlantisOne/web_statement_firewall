@@ -1,0 +1,67 @@
+[
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "1",
+      "title": "СБ/ПБ ОГ"
+    }
+  },
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "2",
+      "title": "Владелец ИА"
+    }
+  },
+  {
+    "model": "main.Signer_role",
+    "fields": {
+      "id": "3",
+      "title": "СП ИТ/СП ОГ"
+    }
+  },
+  {
+    "model": "main.Organization",
+    "fields": {
+      "id": "1",
+      "title": "АО «Оренбургнефть»"
+    }
+  },
+  {
+    "model": "main.Organization",
+    "fields": {
+      "id": "2",
+      "title": "РН-БГПП"
+    }
+  },
+    {
+    "model": "main.Signers_bid",
+    "fields": {
+      "id": "1",
+      "role": "1",
+      "position": "Начальник отдела ИБ",
+      "full_name": "Байтимиров Р. М.",
+      "organization": "1"
+    }
+  },
+    {
+    "model": "main.Signers_bid",
+    "fields": {
+      "id": "2",
+      "role": "2",
+      "position": "Начальник управления МАСИТИБ",
+      "full_name": "Шепляков В.Д.",
+      "organization": "1"
+    }
+  },
+    {
+    "model": "main.Signers_bid",
+    "fields": {
+      "id": "3",
+      "role": "3",
+      "position": "Начальник отдела ИТиС",
+      "full_name": "Иванов А.А.",
+      "organization": "1"
+    }
+  }
+]
