@@ -1,4 +1,4 @@
-from .models import Bid, Rule
+from .models import Bid, Rule, SourceBid, RecipientBid
 from django.forms import ModelForm, TextInput, Textarea, HiddenInput, modelformset_factory, formset_factory
 from django import forms
 
@@ -61,37 +61,53 @@ class BidForm(ModelForm):
 
 RuleFormset = modelformset_factory(
     Rule,
-    fields=('bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid',),
+    fields=('bid', 'port_bid', 'protocol_bid'),
     extra=1,
     widgets={
-        'source_bid': TextInput(attrs={'placeholder': "Источник",}),
-        'recipient_bid': TextInput(attrs={'placeholder': "Получатель",}),
         'port_bid': TextInput(attrs={'placeholder': "Порт",})
     }
 )
 
+SourceBidFormset = modelformset_factory(
+    SourceBid,
+    fields=('bid', 'source_bid'),
+    extra=1,
+    widgets={
+        'source_bid': TextInput(attrs={'placeholder': "Источник",})
+    }
+)
 
-class RuleForm(ModelForm):
-    class Meta:
-        model = Rule
-        fields = ['bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', ]
-        widgets = {
-            'bid': TextInput(attrs={
-                'placeholder': "Номер заявки"
-            }),
-            'source_bid': TextInput(attrs={
-                'placeholder': "Источник"
-            }),
-            'recipient_bid': TextInput(attrs={
-                'placeholder': "Получатель"
-            }),
-            'protocol_bid': TextInput(attrs={
-                'placeholder': "Протокол"
-            }),
-            'port_bid': TextInput(attrs={
-                'placeholder': "Порт"
-            }),
-        }
+RecipientBidFormset = modelformset_factory(
+    RecipientBid,
+    fields=('bid', 'recipient_bid'),
+    extra=1,
+    widgets={
+        'recipient_bid': TextInput(attrs={'placeholder': "Получатель",})
+    }
+)
+
+
+# class RuleForm(ModelForm):
+#     class Meta:
+#         model = Rule
+#         fields = ['bid', 'source_bid', 'recipient_bid', 'port_bid', 'protocol_bid', ]
+#         widgets = {
+#             'bid': TextInput(attrs={
+#                 'placeholder': "Номер заявки"
+#             }),
+#             'source_bid': TextInput(attrs={
+#                 'placeholder': "Источник"
+#             }),
+#             'recipient_bid': TextInput(attrs={
+#                 'placeholder': "Получатель"
+#             }),
+#             'protocol_bid': TextInput(attrs={
+#                 'placeholder': "Протокол"
+#             }),
+#             'port_bid': TextInput(attrs={
+#                 'placeholder': "Порт"
+#             }),
+#         }
 
 # from django import forms
 # from django.contrib.auth.models import User

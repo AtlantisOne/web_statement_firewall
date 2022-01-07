@@ -18,35 +18,55 @@
             <div class="main">
 
                 <div class="">
-                    {{ form_rule.management_form }}
-                    {% for form in form_rule %}
+
                     <div class="row form-row spacer">
                         <div class="col-4">
                             <div class="main">
+                                {{ form_source.management_form }}
+                                {% for form_so in form_source %}
                                 <div>
                                     <p>Источник</p>
-                                    {{form.source_bid}}
-                                </div>
-                                <div>
-                                    <p>Получатель</p>
-                                    {{form.recipient_bid}}
-                                </div>
-                                <div>
-                                    <p>Порты</p>
-                                    {{form.port_bid}}
-                                </div>
-                                <div>
-                                    <p>Протокол</p>
-                                    {{form.protocol_bid}}
+                                    {{form_so.source_bid}}
                                 </div>
                                 <div class="input-group-append">
                                     <br><br>
                                     <button class="btn btn-success add-form-row">+</button>
                                 </div>
+                                {% endfor %}
+
+                                {{ form_recipient.management_form }}
+                                {% for form_re in form_recipient %}
+                                <div>
+                                    <p>Получатель</p>
+                                    {{form_re.recipient_bid}}
+                                </div>
+                                <div class="input-group-append">
+                                    <br><br>
+                                    <button class="btn btn-success add-form-row">+</button>
+                                </div>
+                                {% endfor %}
+
+                                {{ form_rule.management_form }}
+                                {% for form_rl in form_rule %}
+                                <div>
+                                    <p>Порты</p>
+                                    {{form_rl.port_bid}}
+                                </div>
+                                <div>
+                                    <p>Протокол</p>
+                                    {{form_rl.protocol_bid}}
+                                </div>
+                                <div class="input-group-append">
+                                    <br><br>
+                                    <button class="btn btn-success add-form-row">+</button>
+                                </div>
+                                {% endfor %}
+
+
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+
 
                 </div>
 

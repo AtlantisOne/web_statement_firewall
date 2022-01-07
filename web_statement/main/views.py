@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from .models import Bid, Signers_bid, Rule
-from .forms import BidForm, RuleForm, RuleFormset
+from .models import Bid, Signers_bid, Rule, SourceBid, RecipientBid
+from .forms import BidForm, RuleFormset, SourceBidFormset, RecipientBidFormset
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
 from docxtpl import DocxTemplate
@@ -79,11 +79,15 @@ def create_html(request, form=None):
     if request.method == 'GET':
         form_bid = BidForm(request.GET or None)
         form_rule = RuleFormset(queryset=Rule.objects.none())
+        form_source = SourceBidFormset(queryset=SourceBid.objects.none())
+        form_recipient = RecipientBidFormset(queryset=RecipientBid.objects.none())
 
     elif request.method == 'POST':
         form_bid = BidForm(request.POST)
         form_rule = RuleFormset(request.POST)
-        if form_bid.is_valid() and form_rule.is_valid():
+        form_source = SourceBidFormset(request.POST)
+        form_recipient = RecipientBidFormset(request.POST)
+        if form_bid.is_valid() and form_rule.is_valid() and form_source.is_valid() and form_recipient.is_valid():
             instance = form_bid.save()
             instance.num_bid = "OP-" + str(instance.id)
             instance.status_bid_id = 2
@@ -92,13 +96,31 @@ def create_html(request, form=None):
             signers = Signers_bid.objects.all()
             instance.save()
 
-            for form_r in form_rule:
-                rule = form_r.save(commit=False)
+            for form_rl in form_rule:
+                rule = form_rl.save(commit=False)
                 rule.instance = instance
                 rule.bid_id = instance.id
                 rule.save()
-            rules = Rule.objects.filter(bid=instance.id)
-            gen_docfile(request, instance, rules, signers)
+
+            for form_so in form_source:
+                sourse = form_so.save(commit=False)
+                sourse.instance = instance
+                sourse.bid_id = instance.id
+                sourse.save()
+
+            for form_re in form_recipient:
+                recipient = form_re.save(commit=False)
+                recipient.instance = instance
+                recipient.bid_id = instance.id
+                recipient.save()
+
+            # for form_rl, form_so, form_re, in form_rule, form_source, form_recipient:
+            #     rule, sourse, recipient = form_rl.save(commit=False), form_so.save(commit=False), form_re.save(commit=False)
+            #     rule.instance, sourse.instance, recipient.instance = instance
+            #     rule.bid_id, sourse.bid_id, recipient.bid_id = instance.id
+            #     rule.save(), sourse.save(), recipient.save()
+            # rules = Rule.objects.filter(bid=instance.id)
+            # gen_docfile(request, instance, rules, signers)
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
             # return redirect('main:create_html')
         else:
@@ -107,6 +129,8 @@ def create_html(request, form=None):
     data = {
         'form_bid': form_bid,
         'form_rule': form_rule,
+        'form_source': form_source,
+        'form_recipient': form_recipient,
         'error_bid': error_bid,
         'complete_bid': complete_bid,
         'num_bid': num_bid,
