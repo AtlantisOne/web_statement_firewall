@@ -40,7 +40,7 @@ def gen_num_bid():
     pass
 
 
-def gen_docfile(request, instance, rules, signers=None):
+def gen_docfile(request, instance, rules, sources, recipients, signers=None):
     doc = DocxTemplate("main/docs/bid.docx")
     filepath = r'main/docs/' + instance.num_bid + '.docx'
 
@@ -50,6 +50,8 @@ def gen_docfile(request, instance, rules, signers=None):
                # 'port_bid': rules.port_bid,
                # 'protocol_bid': rules.protocol_bid,
                'rules': rules,
+               'sources': sources,
+               'recipients': recipients,
                'description_bid': instance.description_bid,
                'justification_bid': instance.justification_bid,
                'persistent_rule': instance.get_persistent_rule(),
@@ -103,10 +105,10 @@ def create_html(request, form=None):
                 rule.save()
 
             for form_so in form_source:
-                sourse = form_so.save(commit=False)
-                sourse.instance = instance
-                sourse.bid_id = instance.id
-                sourse.save()
+                source = form_so.save(commit=False)
+                source.instance = instance
+                source.bid_id = instance.id
+                source.save()
 
             for form_re in form_recipient:
                 recipient = form_re.save(commit=False)
@@ -114,13 +116,10 @@ def create_html(request, form=None):
                 recipient.bid_id = instance.id
                 recipient.save()
 
-            # for form_rl, form_so, form_re, in form_rule, form_source, form_recipient:
-            #     rule, sourse, recipient = form_rl.save(commit=False), form_so.save(commit=False), form_re.save(commit=False)
-            #     rule.instance, sourse.instance, recipient.instance = instance
-            #     rule.bid_id, sourse.bid_id, recipient.bid_id = instance.id
-            #     rule.save(), sourse.save(), recipient.save()
-            # rules = Rule.objects.filter(bid=instance.id)
-            # gen_docfile(request, instance, rules, signers)
+            rules = Rule.objects.filter(bid=instance.id)
+            sources = SourceBid.objects.filter(bid=instance.id)
+            recipients = RecipientBid.objects.filter(bid=instance.id)
+            gen_docfile(request, instance, rules, sources, recipients, signers)
             complete_bid = f'Заявка успешно добавлена: {num_bid}'
             # return redirect('main:create_html')
         else:
